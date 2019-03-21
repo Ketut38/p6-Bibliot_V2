@@ -5,6 +5,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
+@Entity
+@Table(name="library")
 public class Library implements Serializable {
 
     @Id
@@ -13,8 +15,8 @@ public class Library implements Serializable {
     Integer id;
     private String name;
     private String city;
-    @OneToMany(mappedBy = "library", cascade = CascadeType.ALL)
-    //@JsonIgnore
+    
+    @OneToMany
     private List<Work> works;
 
     public Library() {

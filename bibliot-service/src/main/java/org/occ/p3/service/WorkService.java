@@ -9,5 +9,8 @@ public interface WorkService {
     public List<Work> getWorksByAuthor(String author);
 
     public List<Work> getWorksByPublicationDate (Integer publicationDate);
+    
+    
+    	
 
 }

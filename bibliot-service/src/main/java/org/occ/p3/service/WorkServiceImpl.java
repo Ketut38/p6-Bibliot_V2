@@ -18,7 +18,7 @@ WorkRepository workRepository;
 
         /// Appeler le consumer
 
-        List<Work> worksGotFromConsumer = workRepository.findByAuthor(author);
+        List<Work> worksGotFromConsumer = workRepository.findByAuthorIsContainingIgnoreCase(author);
 
         return worksGotFromConsumer;
     }

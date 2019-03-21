@@ -6,6 +6,18 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   
+  <build>
+  <plugins>
+    <plugin>
+      <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+        </configuration>
+    </plugin>
+  </plugins>
+</build>
+  
   
   <artifactId>bibliot-service</artifactId>
   <name>bibliot-service</name>
@@ -26,7 +38,13 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-        </dependency>	
+        </dependency>
+
+	<dependency>
+		<groupId>javax.mail</groupId>
+		<artifactId>mail</artifactId>
+		<version>1.5.0-b01</version>
+	</dependency>
 	
 	</dependencies>
   

@@ -27,7 +27,7 @@ public class Work implements Serializable {
 	
 	private String bookDescription;
 	
-	@OneToMany
+	@OneToMany(fetch=FetchType.EAGER)
 	private List<Book> booksList;
 
 	public Work() {

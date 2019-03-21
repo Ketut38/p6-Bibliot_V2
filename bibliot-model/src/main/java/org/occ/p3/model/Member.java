@@ -3,6 +3,7 @@ package org.occ.p3.model;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,27 +17,14 @@ import javax.persistence.Table;
 @PrimaryKeyJoinColumn(name = "id")
 public class Member extends User {
 
-	@Id
-    @GeneratedValue(generator="gen_member", strategy = GenerationType.IDENTITY)
-    @SequenceGenerator(name="gen_member", sequenceName="seq_member", allocationSize=1)		
-	private Integer id;	
-	
+
 	private String name;
 	
-	private String userName;
+	private String mailAdress;
 
-	@OneToMany
+	@OneToMany(fetch=FetchType.EAGER)
 	private List<Borrow> borrowList;
 
-
-	public Integer getId() {
-		return id;
-	}
-
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 
 	public String getName() {
@@ -49,14 +37,6 @@ public class Member extends User {
 	}
 
 
-	public String getUserName() {
-		return userName;
-	}
-
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
 
 
 	public List<Borrow> getBorrowList() {
@@ -66,6 +46,16 @@ public class Member extends User {
 
 	public void setBorrowList(List<Borrow> borrowList) {
 		this.borrowList = borrowList;
+	}
+
+
+	public String getMailAdress() {
+		return mailAdress;
+	}
+
+
+	public void setMailAdress(String mailAdress) {
+		this.mailAdress = mailAdress;
 	}
 	
 	

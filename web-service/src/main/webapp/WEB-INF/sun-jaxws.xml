@@ -1,0 +1,15 @@
+<endpoints xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime"
+		   version="2.0">
+
+
+	<endpoint name="workWeb" implementation="org.occ.p3.webservices.BookWs"
+			  url-pattern="/ws/BookWs" />
+	<endpoint name="workWeb" implementation="org.occ.p3.webservices.BorrowWs"
+			  url-pattern="/ws/borrowWs" />
+	<endpoint name="workWeb" implementation="org.occ.p3.webservices.UserWs"
+			  url-pattern="/ws/UserWs" />	
+	<endpoint name="workWeb" implementation="org.occ.p3.webservices.WorkWs"
+			  url-pattern="/ws/workWs" />	  
+
+
+</endpoints>

@@ -1,5 +1,7 @@
 package org.occ.p3.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,17 +12,15 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="book")
-public class Book {
+public class Book implements Serializable {
 	
 	@Id
     @GeneratedValue(generator="gen_book", strategy = GenerationType.IDENTITY)
     @SequenceGenerator(name="gen_book", sequenceName="seq_book", allocationSize=1)		
 	private Integer id;	
 
-	private Boolean isAvailable;
+	private boolean available;
 	
-	@ManyToOne
-	private Work originWork;
 
 	public Integer getId() {
 		return id;
@@ -30,22 +30,14 @@ public class Book {
 		this.id = id;
 	}
 
-	public Boolean getIsAvailable() {
-		return isAvailable;
+	public boolean isAvailable() {
+		return available;
 	}
 
-	public void setIsAvailable(Boolean isAvailable) {
-		this.isAvailable = isAvailable;
+	public void setAvailable(boolean available) {
+		this.available = available;
 	}
 
-	public Work getOriginWork() {
-		return originWork;
-	}
 
-	public void setOriginWork(Work originWork) {
-		this.originWork = originWork;
-	}
-	
-	
-	
+
 }
