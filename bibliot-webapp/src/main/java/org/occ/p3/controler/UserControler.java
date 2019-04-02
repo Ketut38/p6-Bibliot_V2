@@ -2,11 +2,7 @@ package org.occ.p3.controler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.swing.plaf.synth.SynthSeparatorUI;
 
-import org.occ.p3.model.Member;
-import org.occ.p3.model.User;
-import org.occ.p3.service.UserService;
 import org.occ.p3.webservices.UserWeb;
 import org.occ.p3.webservices.UserWs;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +37,7 @@ public class UserControler {
 
 	@RequestMapping(value = "/authentificate", method = RequestMethod.POST)
 	public ModelAndView authentification(HttpServletRequest request) {
-		boolean result;
+		org.occ.p3.webservices.Member result;
 		System.out.println("toto nous sommes bien arrivés");
 
 		ModelAndView modelAndView = null;
@@ -53,14 +49,14 @@ public class UserControler {
 
 			
 			result = userWs.isValidUser(username, password);
-					//userService.isValidUser(username, password);
+					
 
-			if (result == true) {
+			if (result != null) {
 				System.out.println("l'utilisateur existe");
 				
 
 				// Je dis que le mec est connecté
-				org.occ.p3.webservices.User memberConnected = userWs.findByUsernameAndPassword(username, password); 
+				org.occ.p3.webservices.Member memberConnected = userWs.isValidUser(username, password); 
 						//userService.findMemberByUsernameAndPassword(username,password);
 				System.out.println("le membre connecté a enregistré est " +memberConnected);
 				request.getSession().setAttribute("connected", true);

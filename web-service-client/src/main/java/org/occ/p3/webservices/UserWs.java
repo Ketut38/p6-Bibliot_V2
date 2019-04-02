@@ -36,42 +36,6 @@ public interface UserWs {
 
     /**
      * 
-     * @param arg1
-     * @param arg0
-     * @return
-     *     returns boolean
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "isValidUser", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.IsValidUser")
-    @ResponseWrapper(localName = "isValidUserResponse", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.IsValidUserResponse")
-    @Action(input = "http://webservices.p3.occ.org/userWs/isValidUserRequest", output = "http://webservices.p3.occ.org/userWs/isValidUserResponse")
-    public boolean isValidUser(
-        @WebParam(name = "arg0", targetNamespace = "")
-        String arg0,
-        @WebParam(name = "arg1", targetNamespace = "")
-        String arg1);
-
-    /**
-     * 
-     * @param arg1
-     * @param arg0
-     * @return
-     *     returns org.occ.p3.webservices.Member
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "findMemberByUsernameAndPassword", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.FindMemberByUsernameAndPassword")
-    @ResponseWrapper(localName = "findMemberByUsernameAndPasswordResponse", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.FindMemberByUsernameAndPasswordResponse")
-    @Action(input = "http://webservices.p3.occ.org/userWs/findMemberByUsernameAndPasswordRequest", output = "http://webservices.p3.occ.org/userWs/findMemberByUsernameAndPasswordResponse")
-    public Member findMemberByUsernameAndPassword(
-        @WebParam(name = "arg0", targetNamespace = "")
-        String arg0,
-        @WebParam(name = "arg1", targetNamespace = "")
-        String arg1);
-
-    /**
-     * 
      * @param arg0
      * @return
      *     returns java.util.List<org.occ.p3.webservices.Borrow>
@@ -90,14 +54,14 @@ public interface UserWs {
      * @param arg1
      * @param arg0
      * @return
-     *     returns org.occ.p3.webservices.User
+     *     returns org.occ.p3.webservices.Member
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "findByUsernameAndPassword", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.FindByUsernameAndPassword")
-    @ResponseWrapper(localName = "findByUsernameAndPasswordResponse", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.FindByUsernameAndPasswordResponse")
-    @Action(input = "http://webservices.p3.occ.org/userWs/findByUsernameAndPasswordRequest", output = "http://webservices.p3.occ.org/userWs/findByUsernameAndPasswordResponse")
-    public User findByUsernameAndPassword(
+    @RequestWrapper(localName = "isValidUser", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.IsValidUser")
+    @ResponseWrapper(localName = "isValidUserResponse", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.IsValidUserResponse")
+    @Action(input = "http://webservices.p3.occ.org/userWs/isValidUserRequest", output = "http://webservices.p3.occ.org/userWs/isValidUserResponse")
+    public Member isValidUser(
         @WebParam(name = "arg0", targetNamespace = "")
         String arg0,
         @WebParam(name = "arg1", targetNamespace = "")

@@ -18,13 +18,14 @@ import javax.persistence.Table;
 public class Member extends User {
 
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private String name;
 	
 	private String mailAdress;
-
-	@OneToMany(fetch=FetchType.EAGER)
-	private List<Borrow> borrowList;
-
 
 
 	public String getName() {
@@ -37,16 +38,6 @@ public class Member extends User {
 	}
 
 
-
-
-	public List<Borrow> getBorrowList() {
-		return borrowList;
-	}
-
-
-	public void setBorrowList(List<Borrow> borrowList) {
-		this.borrowList = borrowList;
-	}
 
 
 	public String getMailAdress() {

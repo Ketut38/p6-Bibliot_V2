@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.occ.p3.consumer.repository.BookRepository;
 import org.occ.p3.consumer.repository.BorrowRepository;
-import org.occ.p3.consumer.repository.UserRepository;
+import org.occ.p3.consumer.repository.MemberRepository;
 import org.occ.p3.consumer.repository.WorkRepository;
 import org.occ.p3.model.Book;
 import org.occ.p3.model.Borrow;
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 public class BorrowServiceImpl implements BorrowService {
 	
 	@Autowired
-	UserRepository memberRepository;
+	MemberRepository memberRepository;
 	@Autowired
 	WorkRepository workRepository;
 	@Autowired
@@ -54,6 +54,7 @@ public class BorrowServiceImpl implements BorrowService {
 				// On associe le member a borrow
 				borrowToSave.setMemberBorrowing(membreEmprunt);
 				borrowToSave.setStartBorrowDate(new Date());
+				
 				
 				//Calcul de la date de fin d'emprunt
 				Date borrowDate = borrowToSave.getStartBorrowDate();
