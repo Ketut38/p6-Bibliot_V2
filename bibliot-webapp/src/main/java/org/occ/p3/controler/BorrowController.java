@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-
 import org.occ.p3.service.BorrowService;
 import org.occ.p3.service.UserService;
 import org.occ.p3.webservices.BorrowWeb;

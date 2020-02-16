@@ -160,13 +160,10 @@
 		</dependencies>
 	</dependencyManagement>
 
-	<modules>
-		<module>bibliot-webapp</module>
+	<modules>	
 		<module>bibliot-service</module>
 		<module>bibliot-consumer</module>
 		<module>bibliot-model</module>
-		<module>web-service-client</module>
-		<module>web-service</module>
 	</modules>
 
 </project>
