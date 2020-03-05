@@ -28,6 +28,8 @@ public class ObjectFactory {
     private final static QName _InitResponse_QNAME = new QName("http://webservices.p3.occ.org/", "initResponse");
     private final static QName _Init_QNAME = new QName("http://webservices.p3.occ.org/", "init");
     private final static QName _GetWorksByPublicationDateResponse_QNAME = new QName("http://webservices.p3.occ.org/", "getWorksByPublicationDateResponse");
+    private final static QName _IsReservable_QNAME = new QName("http://webservices.p3.occ.org/", "isReservable");
+    private final static QName _IsReservableResponse_QNAME = new QName("http://webservices.p3.occ.org/", "isReservableResponse");
     private final static QName _GetWorksByAuthor_QNAME = new QName("http://webservices.p3.occ.org/", "getWorksByAuthor");
     private final static QName _GetWorksByAuthorResponse_QNAME = new QName("http://webservices.p3.occ.org/", "getWorksByAuthorResponse");
 
@@ -87,6 +89,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link IsReservable }
+     * 
+     */
+    public IsReservable createIsReservable() {
+        return new IsReservable();
+    }
+
+    /**
+     * Create an instance of {@link IsReservableResponse }
+     * 
+     */
+    public IsReservableResponse createIsReservableResponse() {
+        return new IsReservableResponse();
+    }
+
+    /**
      * Create an instance of {@link Work }
      * 
      */
@@ -136,6 +154,24 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservices.p3.occ.org/", name = "getWorksByPublicationDateResponse")
     public JAXBElement<GetWorksByPublicationDateResponse> createGetWorksByPublicationDateResponse(GetWorksByPublicationDateResponse value) {
         return new JAXBElement<GetWorksByPublicationDateResponse>(_GetWorksByPublicationDateResponse_QNAME, GetWorksByPublicationDateResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link IsReservable }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices.p3.occ.org/", name = "isReservable")
+    public JAXBElement<IsReservable> createIsReservable(IsReservable value) {
+        return new JAXBElement<IsReservable>(_IsReservable_QNAME, IsReservable.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link IsReservableResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices.p3.occ.org/", name = "isReservableResponse")
+    public JAXBElement<IsReservableResponse> createIsReservableResponse(IsReservableResponse value) {
+        return new JAXBElement<IsReservableResponse>(_IsReservableResponse_QNAME, IsReservableResponse.class, null, value);
     }
 
     /**

@@ -42,10 +42,10 @@ public interface BorrowWs {
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "borrowBook", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.BorrowBook")
-    @ResponseWrapper(localName = "borrowBookResponse", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.BorrowBookResponse")
-    @Action(input = "http://webservices.p3.occ.org/borrowWs/borrowBookRequest", output = "http://webservices.p3.occ.org/borrowWs/borrowBookResponse")
-    public Boolean borrowBook(
+    @RequestWrapper(localName = "terminateBorrow", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.TerminateBorrow")
+    @ResponseWrapper(localName = "terminateBorrowResponse", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.TerminateBorrowResponse")
+    @Action(input = "http://webservices.p3.occ.org/borrowWs/terminateBorrowRequest", output = "http://webservices.p3.occ.org/borrowWs/terminateBorrowResponse")
+    public Boolean terminateBorrow(
         @WebParam(name = "arg0", targetNamespace = "")
         Integer arg0,
         @WebParam(name = "arg1", targetNamespace = "")
@@ -75,10 +75,10 @@ public interface BorrowWs {
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "terminateBorrow", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.TerminateBorrow")
-    @ResponseWrapper(localName = "terminateBorrowResponse", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.TerminateBorrowResponse")
-    @Action(input = "http://webservices.p3.occ.org/borrowWs/terminateBorrowRequest", output = "http://webservices.p3.occ.org/borrowWs/terminateBorrowResponse")
-    public Boolean terminateBorrow(
+    @RequestWrapper(localName = "borrowBook", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.BorrowBook")
+    @ResponseWrapper(localName = "borrowBookResponse", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.BorrowBookResponse")
+    @Action(input = "http://webservices.p3.occ.org/borrowWs/borrowBookRequest", output = "http://webservices.p3.occ.org/borrowWs/borrowBookResponse")
+    public Boolean borrowBook(
         @WebParam(name = "arg0", targetNamespace = "")
         Integer arg0,
         @WebParam(name = "arg1", targetNamespace = "")

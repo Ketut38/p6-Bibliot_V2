@@ -25,7 +25,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="bookDescription" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="booksList" type="{http://webservices.p3.occ.org/}book" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="maxResAllowed" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="publicationDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
+ *         &lt;element name="reservable" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *         &lt;element name="title" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -41,7 +43,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "bookDescription",
     "booksList",
     "id",
+    "maxResAllowed",
     "publicationDate",
+    "reservable",
     "title"
 })
 public class Work {
@@ -51,8 +55,10 @@ public class Work {
     @XmlElement(nillable = true)
     protected List<Book> booksList;
     protected Integer id;
+    protected Integer maxResAllowed;
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar publicationDate;
+    protected boolean reservable;
     protected String title;
 
     /**
@@ -157,6 +163,30 @@ public class Work {
     }
 
     /**
+     * Obtient la valeur de la propriété maxResAllowed.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
+     */
+    public Integer getMaxResAllowed() {
+        return maxResAllowed;
+    }
+
+    /**
+     * Définit la valeur de la propriété maxResAllowed.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
+     */
+    public void setMaxResAllowed(Integer value) {
+        this.maxResAllowed = value;
+    }
+
+    /**
      * Obtient la valeur de la propriété publicationDate.
      * 
      * @return
@@ -178,6 +208,22 @@ public class Work {
      */
     public void setPublicationDate(XMLGregorianCalendar value) {
         this.publicationDate = value;
+    }
+
+    /**
+     * Obtient la valeur de la propriété reservable.
+     * 
+     */
+    public boolean isReservable() {
+        return reservable;
+    }
+
+    /**
+     * Définit la valeur de la propriété reservable.
+     * 
+     */
+    public void setReservable(boolean value) {
+        this.reservable = value;
     }
 
     /**

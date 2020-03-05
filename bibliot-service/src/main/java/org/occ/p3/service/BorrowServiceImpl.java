@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class BorrowServiceImpl implements BorrowService {
-	
+
 	@Autowired
 	MemberRepository memberRepository;
 	@Autowired
@@ -50,37 +50,40 @@ public class BorrowServiceImpl implements BorrowService {
 				borrowToSave.setBook(result);
 				// on recupère l'Id du membre passé en parametre
 				Member membreEmprunt = memberRepository.findById(membreId).get();
-				
+
 				// On associe le member a borrow
 				borrowToSave.setMemberBorrowing(membreEmprunt);
 				borrowToSave.setStartBorrowDate(new Date());
-				
-				
-				//Calcul de la date de fin d'emprunt
+
+				// Calcul de la date de fin d'emprunt
 				Date borrowDate = borrowToSave.getStartBorrowDate();
 				Calendar calendar = Calendar.getInstance();
 				calendar.setTime(borrowDate);
-				calendar.add(Calendar.WEEK_OF_MONTH,4);
+				calendar.add(Calendar.WEEK_OF_MONTH, 4);
 				borrowToSave.setEndBorrowDate(calendar.getTime());
-				
-				//Set le statut de l'emprunt + Ajout du nom de l'oeuvre à l'emprunt
-				
+
+				//Set le statut de l'emprunt + Ajout du nom de l'oeuvre à l'emprunt + décrémente MaxResAllowed
+
 				borrowToSave.setStatus(BorrowStatusEnum.ENCOURS.val());
 				borrowToSave.setWorkName(workName);
-				
+
+				Integer maxRes = myWorkGot.getMaxResAllowed();
+				maxRes = maxRes--;
+				myWorkGot.setMaxResAllowed(maxRes);
+
 				// Save le borrow dans le repository
 				borrowRepository.save(borrowToSave);
-				//Indique que le livre n'est plus disponible et on sauvegarde dans le bookRepository
+				// Indique que le livre n'est plus disponible et on sauvegarde dans le
+				// bookRepository
 				result.setAvailable(false);
 				bookRepository.save(result);
-				
-				//Mettre a jour la liste des emprunt du memmberCo et save
-				
+
+				// Mettre a jour la liste des emprunt du memmberCo et save
+
 				List<Borrow> memberListBorrowToUpdate = userService.findBorrowListByMember(membreEmprunt);
 				memberListBorrowToUpdate.add(borrowToSave);
-				
+
 				memberRepository.save(membreEmprunt);
-				
 
 				toReturn = true;
 				break;
@@ -113,24 +116,24 @@ public class BorrowServiceImpl implements BorrowService {
 			toReturn = true;
 
 		} else {
-			
+
 			toReturn = false;
 		}
 
 		return toReturn;
 	}
-	
-	public Boolean terminateBorrow(Integer borrowId, Integer membreId ) {	
-		
+
+	public Boolean terminateBorrow(Integer borrowId, Integer membreId) {
+
 		Boolean toReturn = false;
-	
-		//Set le statut de l'emprunt a "rendu"
+
+		// Set le statut de l'emprunt a "rendu"
 		Borrow borrowToEnd = borrowRepository.findById(borrowId).get();
 		borrowToEnd.setStatus(BorrowStatusEnum.RENDU.val());
-		//Set le book comme disponible
+		// Set le book comme disponible
 		Book returnedBook = borrowToEnd.getBook();
 		returnedBook.setAvailable(true);
-		//Sauvegarde du livre rendu
+		// Sauvegarde du livre rendu
 		bookRepository.save(returnedBook);
 		borrowRepository.save(borrowToEnd);
 		toReturn = true;

@@ -27,6 +27,10 @@ public class Work implements Serializable {
 	
 	private String bookDescription;
 	
+	private Integer maxResAllowed;
+	
+	private Boolean reservable = new Boolean(false); 
+	
 	@OneToMany(fetch=FetchType.EAGER)
 	private List<Book> booksList;
 
@@ -86,5 +90,23 @@ public class Work implements Serializable {
 	public void setBooksList(List<Book> booksList) {
 		this.booksList = booksList;
 	}
+
+	public Integer getMaxResAllowed() {
+		return maxResAllowed;
+	}
+
+	public void setMaxResAllowed(Integer maxResAllowed) {
+		this.maxResAllowed = maxResAllowed;
+	}
+
+	public boolean isReservable() {
+		return reservable;
+	}
+
+	public void setReservable(boolean reservable) {
+		this.reservable = reservable;
+	}
+
+
 
 }

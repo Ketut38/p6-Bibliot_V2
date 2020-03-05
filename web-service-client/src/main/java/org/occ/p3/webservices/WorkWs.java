@@ -64,4 +64,19 @@ public interface WorkWs {
         @WebParam(name = "arg0", targetNamespace = "")
         String arg0);
 
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns boolean
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "isReservable", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.IsReservable")
+    @ResponseWrapper(localName = "isReservableResponse", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.IsReservableResponse")
+    @Action(input = "http://webservices.p3.occ.org/workWs/isReservableRequest", output = "http://webservices.p3.occ.org/workWs/isReservableResponse")
+    public boolean isReservable(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Integer arg0);
+
 }

@@ -47,10 +47,10 @@
 					<configuration>
 						<sourceDestDir>${project.basedir}/src/main/java</sourceDestDir>
 						<wsdlUrls>
-							<wsdlUrl>http://lfr011641:8080/web-service-05227549248861136051.0.1-SNAPSHOT/ws/BookWs?wsdl</wsdlUrl>
-				            <wsdlUrl>http://lfr011641:8080/web-service-05227549248861136051.0.1-SNAPSHOT/ws/borrowWs?wsdl</wsdlUrl> 
-						    <wsdlUrl>http://lfr011641:8080/web-service-05227549248861136051.0.1-SNAPSHOT/ws/UserWs?wsdl</wsdlUrl> 
-							<wsdlUrl>http://lfr011641:8080/web-service-05227549248861136051.0.1-SNAPSHOT/ws/workWs?wsdl</wsdlUrl> 
+							<wsdlUrl>http://lfr011641:8080/web-service-07442684945879092018.0.1-SNAPSHOT/ws/BookWs?wsdl</wsdlUrl>
+				            <wsdlUrl>http://lfr011641:8080/web-service-07442684945879092018.0.1-SNAPSHOT/ws/borrowWs?wsdl</wsdlUrl> 
+						    <wsdlUrl>http://lfr011641:8080/web-service-07442684945879092018.0.1-SNAPSHOT/ws/UserWs?wsdl</wsdlUrl> 
+							<wsdlUrl>http://lfr011641:8080/web-service-07442684945879092018.0.1-SNAPSHOT/ws/workWs?wsdl</wsdlUrl> 
 						</wsdlUrls>
 					</configuration>
 				</execution>

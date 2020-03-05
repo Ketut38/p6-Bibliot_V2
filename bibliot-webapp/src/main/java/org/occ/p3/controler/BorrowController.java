@@ -137,7 +137,7 @@ UserWs userWs = userWsService.getUserWsPort();
 		Member memberCo = (Member) request.getSession().getAttribute("memberConnected");
 		Integer membreId = memberCo.getId();
 		Boolean endBorrow = borrowWs.terminateBorrow(borrowId, membreId);
-				//borrowService.terminateBorrow(borrowId, membreId);
+				
 
 		if (endBorrow == true) {
 

@@ -9,6 +9,10 @@ public interface WorkService {
     public List<Work> getWorksByAuthor(String author);
 
     public List<Work> getWorksByPublicationDate (Integer publicationDate);
+
+	public boolean isReservable(Integer workId);
+	
+	public void setMaxReservable (Integer workId);
     
     
     	

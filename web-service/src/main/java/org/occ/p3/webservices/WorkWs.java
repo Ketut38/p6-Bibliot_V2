@@ -30,6 +30,11 @@ public class WorkWs {
     	
     }
     
+    @WebMethod
+    public boolean isReservable(Integer workId) {
+    	return workService.isReservable(workId);
+    }
+    
     @PostConstruct
 	public void init() {
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
