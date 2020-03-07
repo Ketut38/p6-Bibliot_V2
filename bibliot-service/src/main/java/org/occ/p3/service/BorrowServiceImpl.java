@@ -67,9 +67,7 @@ public class BorrowServiceImpl implements BorrowService {
 				borrowToSave.setStatus(BorrowStatusEnum.ENCOURS.val());
 				borrowToSave.setWorkName(workName);
 
-				Integer maxRes = myWorkGot.getMaxResAllowed();
-				maxRes = maxRes--;
-				myWorkGot.setMaxResAllowed(maxRes);
+				
 
 				// Save le borrow dans le repository
 				borrowRepository.save(borrowToSave);
