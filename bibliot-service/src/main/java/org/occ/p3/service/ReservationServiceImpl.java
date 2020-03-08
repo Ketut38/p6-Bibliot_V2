@@ -7,10 +7,10 @@ import org.occ.p3.consumer.repository.BorrowRepository;
 import org.occ.p3.consumer.repository.MemberRepository;
 import org.occ.p3.consumer.repository.ReservationRepository;
 import org.occ.p3.consumer.repository.WorkRepository;
-
 import org.occ.p3.model.Borrow;
 import org.occ.p3.model.Member;
 import org.occ.p3.model.Reservation;
+import org.occ.p3.model.ReservationStatusEnum;
 import org.occ.p3.model.Work;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -65,6 +65,7 @@ public class ReservationServiceImpl implements ReservationService {
 			reservationToSave.setWork(myWorkGot);
 			reservationToSave.setMemberReserving(membreEmprunt);
 			reservationToSave.setStartDate(new Date());
+			reservationToSave.setStatus(ReservationStatusEnum.PENDING.val());
 			//Décrémente la quantité réservable de l'oeuvre
 			maxRes = maxRes--;
 			myWorkGot.setMaxResAllowed(maxRes);
@@ -84,8 +85,22 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Override
 	public Boolean cancelReservation(Integer reservationId, Integer memberId) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Boolean toReturn = false;
+		Reservation resToCancel = reservationRepository.findById(reservationId).get();
+		Work workResToCancel = resToCancel.getWork();
+		Integer maxRes = workResToCancel.getMaxResAllowed();
+		//Set le status de la resa à "terminée"
+		resToCancel.setStatus(ReservationStatusEnum.DONE.val());
+		//Rajoute +1 à quantité de resa possible
+		workResToCancel.setMaxResAllowed(maxRes++);
+		//Sauvegarde de l'oeuvre et de la resa dans repository
+		reservationRepository.save(resToCancel);
+		workRepository.save(workResToCancel);
+		toReturn = true;
+		return toReturn;
+		
+		
 	}
 
 }
