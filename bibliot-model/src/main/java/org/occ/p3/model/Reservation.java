@@ -25,13 +25,12 @@ public class Reservation implements Serializable {
 	@Id
 	@GeneratedValue(generator = "gen_reservation", strategy = GenerationType.IDENTITY)
 	@SequenceGenerator(name = "gen_reservation", sequenceName = "seq_reservation", allocationSize = 1)
+	
 	private Integer id;
 	
 	private String status;
 	
 	private Date startDate;
-	
-	private Member memberReserving;
 	
 	public String workTitle;
 	
@@ -46,6 +45,14 @@ public class Reservation implements Serializable {
 		return status;
 	}
 
+	public Member getMemberReserving() {
+		return member;
+	}
+
+	public void setMemberReserving(Member memberReserving) {
+		this.member = memberReserving;
+	}
+
 	public void setStatus(String status) {
 		this.status = status;
 	}
@@ -58,13 +65,6 @@ public class Reservation implements Serializable {
 		this.startDate = startDate;
 	}
 
-	public Member getMemberReserving() {
-		return memberReserving;
-	}
-
-	public void setMemberReserving(Member memberReserving) {
-		this.memberReserving = memberReserving;
-	}
 	
 	public Work getWork() {
 		return work;

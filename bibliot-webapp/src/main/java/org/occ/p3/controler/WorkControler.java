@@ -24,7 +24,7 @@ public class WorkControler {
 
 	public @ResponseBody
 
-			List<org.occ.p3.webservices.Work> getWorksByAuthor(@PathVariable String author) {
+		List<org.occ.p3.webservices.Work> getWorksByAuthor(@PathVariable String author) {
 		List<org.occ.p3.webservices.Work> workByAuthor = workWs.getWorksByAuthor(author);
 		return workByAuthor;
 	}

@@ -24,6 +24,7 @@ public class WorkWs {
      return workService.getWorksByAuthor(author);
     	
     }
+    
     @WebMethod
     public List<Work> getWorksByPublicationDate (Integer publicationDate){
     return workService.getWorksByPublicationDate(publicationDate);

@@ -1,9 +1,19 @@
 package org.occ.p3.model;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
 @Table(name="work")
@@ -30,6 +40,10 @@ public class Work implements Serializable {
 	private Integer maxResAllowed;
 	
 	private Boolean reservable = new Boolean(false); 
+	
+	@OneToMany(fetch=FetchType.LAZY)
+	private List<Reservation> reservations;
+	
 	
 	@OneToMany(fetch=FetchType.EAGER)
 	private List<Book> booksList;
@@ -90,6 +104,15 @@ public class Work implements Serializable {
 	public void setBooksList(List<Book> booksList) {
 		this.booksList = booksList;
 	}
+	
+	public List<Reservation> getReservations() {
+		return reservations;
+	}
+
+	public void setReservations(List<Reservation> reservations) {
+		this.reservations = reservations;
+	}
+	
 
 	public Integer getMaxResAllowed() {
 		return maxResAllowed;

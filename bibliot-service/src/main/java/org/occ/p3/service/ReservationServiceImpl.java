@@ -39,7 +39,7 @@ public class ReservationServiceImpl implements ReservationService {
 		Member membreEmprunt = memberRepository.findById(memberId).get();
 		List<Borrow> memberBorrowList = borrowRepository.findByMember(membreEmprunt);
 		
-		boolean goReserve = true;
+		boolean goReserve = false;
 		
 		// On parcours la borrowList
 		for (Borrow result : memberBorrowList) {
@@ -47,11 +47,10 @@ public class ReservationServiceImpl implements ReservationService {
 			String borrowStatus = result.getStatus().toString();
 			// On check si le membre n'a pas dejà l'oeuvre dans sa liste de borrow
 			if (result.workTitle.equals(workName) && (!"Rendu".equals(borrowStatus))) {
-				System.out.println("Vous empruntez dejà cette oeuvre!");
-				goReserve = false;
 				
+				goReserve = true;
 				break;
-
+			
 			}
 
 		}

@@ -28,6 +28,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="maxResAllowed" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="publicationDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="reservable" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
+ *         &lt;element name="reservations" type="{http://webservices.p3.occ.org/}reservation" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="title" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -46,6 +47,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "maxResAllowed",
     "publicationDate",
     "reservable",
+    "reservations",
     "title"
 })
 public class Work {
@@ -59,6 +61,8 @@ public class Work {
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar publicationDate;
     protected boolean reservable;
+    @XmlElement(nillable = true)
+    protected List<Reservation> reservations;
     protected String title;
 
     /**
@@ -224,6 +228,35 @@ public class Work {
      */
     public void setReservable(boolean value) {
         this.reservable = value;
+    }
+
+    /**
+     * Gets the value of the reservations property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the reservations property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getReservations().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Reservation }
+     * 
+     * 
+     */
+    public List<Reservation> getReservations() {
+        if (reservations == null) {
+            reservations = new ArrayList<Reservation>();
+        }
+        return this.reservations;
     }
 
     /**
