@@ -29,15 +29,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="C:/Users/qabbes/Documents/env/Parcours JEE/environnement/maven/repository/org/hibernate/hibernate-core/5.2.3.Final/hibernate-core-5.2.3.Final.jar" sourcepath="C:/Users/Quentin/Documents/OpenClassrooms/Parcours JEE/environnement/maven/repository/org/hibernate/hibernate-core/5.2.3.Final/hibernate-core-5.2.3.Final-sources.jar">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="maven.groupId" value="org.hibernate"/>
-			<attribute name="maven.artifactId" value="hibernate-core"/>
-			<attribute name="maven.version" value="5.2.3.Final"/>
-			<attribute name="maven.scope" value="compile"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="src" path="/p3-parent"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
