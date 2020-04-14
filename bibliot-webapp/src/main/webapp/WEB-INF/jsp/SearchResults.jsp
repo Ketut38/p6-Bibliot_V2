@@ -13,6 +13,7 @@
 
 <%@ include file="/WEB-INF/jsp/headers.jsp" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
     <c:forEach items="${foundWorks}" var="work">
 <ul>
@@ -23,6 +24,7 @@
 	<c:if test = "${work.reservable}"><li>
 	  <a href="${pageContext.request.contextPath}/reservation/<c:out value="${work.id}"/> ">Reserver ce livre </a>
       </li></c:if>
+    <li>Réservations en cours: <b>${fn:length(reservation)}</b></li>
 </ul>
 <hr>
     </c:forEach>

@@ -2,6 +2,7 @@ package org.occ.p3.controler;
 
 import java.util.List;
 
+import org.occ.p3.model.Reservation;
 import org.occ.p3.webservices.WorkWeb;
 import org.occ.p3.webservices.WorkWs;
 import org.springframework.stereotype.Controller;
@@ -51,7 +52,11 @@ public class WorkControler {
 		List<org.occ.p3.webservices.Work> workByAuthor = workWs.getWorksByAuthor(searchText);	
 		
 	for (org.occ.p3.webservices.Work result : workByAuthor) {
-
+		
+		
+			List<org.occ.p3.webservices.Reservation> reservation = result.getReservations();
+			
+			System.out.println("taille liste réservation recue = " + reservation.size());
 			boolean workReservable = workWs.isReservable(result.getId());
 			result.setReservable(workReservable);
 

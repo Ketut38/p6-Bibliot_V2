@@ -44,10 +44,10 @@ public class WorkServiceImpl implements WorkService {
 
 		// recuperer la liste de livre de l'oeuvre
 		List<Book> bookList = myWorkGot.getBooksList();
-		Integer maxRes = myWorkGot.getMaxResAllowed();
+		Integer maxRes = myWorkGot.getReservationRealized();
 
 		// verifier si reservable
-		if (maxRes > 0) {
+		if (maxRes < 5) {
 
 			for (Book result : bookList) {
 
@@ -62,7 +62,7 @@ public class WorkServiceImpl implements WorkService {
 		return isReservable;
 	}
 
-	@Override
+	/*@Override
 	public void setMaxReservable(Integer workId) {
 
 		// Recuperer le Work dont on connait l'ID
@@ -81,7 +81,7 @@ public class WorkServiceImpl implements WorkService {
 		
 		maxReservable = nbExemplaire * 2;
 
-		myWorkGot.setMaxResAllowed(maxReservable);
+		myWorkGot.set
 
-	}
+	}*/
 }

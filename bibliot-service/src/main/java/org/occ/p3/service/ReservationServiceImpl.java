@@ -38,68 +38,135 @@ public class ReservationServiceImpl implements ReservationService {
 		// On recupère la liste des borrow du membre.
 		Member membreEmprunt = memberRepository.findById(memberId).get();
 		List<Borrow> memberBorrowList = borrowRepository.findByMember(membreEmprunt);
-		
-		boolean goReserve = false;
-		
-		// On parcours la borrowList
-		for (Borrow result : memberBorrowList) {
-			
-			String borrowStatus = result.getStatus().toString();
-			// On check si le membre n'a pas dejà l'oeuvre dans sa liste de borrow
-			if (result.workTitle.equals(workName) && (!"Rendu".equals(borrowStatus))) {
-				
-				goReserve = true;
-				break;
-			
-			}
 
+		// on recupère la liste de réservation du membre
+		List<Reservation> memberResList = reservationRepository.findByMemberId(memberId);
+
+		boolean goReserve = false;
+		// CAS N°1 : aucun borrow et aucune réservation
+		if (memberBorrowList.isEmpty() && memberResList.isEmpty()) {
+			goReserve = true;
+			// CAS N°2 : une liste de borrow mais pas de liste de réservation
+		} else if (!memberBorrowList.isEmpty() && memberResList.isEmpty()) {
+			// On parcours la borrowList
+			for (Borrow result : memberBorrowList) {
+
+				String borrowStatus = result.getStatus().toString();
+				// CAS N°2.1 : un emprunt avec le meme titre d'oeuvre existe mais deja rendu
+				if ((result.workTitle.equals(workName)) && (borrowStatus.equals("Rendu"))) {
+					goReserve = true;
+					break;
+					// CAS N°2.2 : un emprunt avec le meme titre d'oeuvre existe et n'a pas été
+					// "Rendu"
+				} else if (result.workTitle.equals(workName) && (borrowStatus != "Rendu")) {
+					goReserve = false;
+					// CAS N°2.3 : Pas d'emprunt avec le même titre d'oeuvre
+				} else if (!result.workTitle.equals(workName)) {
+					goReserve = true;
+					break;
+				}
+
+			}
+			// CAS N°3 : pas de liste de borrow et une liste de réservation active
+		} else if ((memberBorrowList.isEmpty()) && (!memberResList.isEmpty())) {
+			for (Reservation result : memberResList) {
+
+				String resStatus = result.getStatus().toString();
+				Integer resWorkId = result.getWorkId();
+				// CAS N°3.1 : L'oeuvre de la réservation est la même que celle qu'on veut
+				// réserver mais est terminée
+				if ((resWorkId == workId) && (resStatus.equals("Terminée"))) {
+					goReserve = true;
+					break;
+
+				} else {
+					goReserve = false;
+				}
+			}
+			// CAS N°4 : Une liste de borrow ET une liste de réservation active
+		} else if (!memberBorrowList.isEmpty() && (!memberResList.isEmpty())) {
+			// On parcours d'abord la borrowList
+			for (Borrow result : memberBorrowList) {
+
+				String borrowStatus = result.getStatus().toString();
+				// CAS N°4.1 : un emprunt avec le meme titre d'oeuvre existe mais deja rendu
+				if ((result.workTitle.equals(workName)) && (borrowStatus.equals("Rendu"))) {
+					goReserve = true;
+					break;
+					// CAS N°4.2 : un emprunt avec le meme titre d'oeuvre existe et n'a pas été
+					// "Rendu"
+				} else if (result.workTitle.equals(workName) && (borrowStatus != "Rendu")) {
+					goReserve = false;
+					// CAS N°4.3 : Pas d'emprunt avec le même titre d'oeuvre
+				} else if (!result.workTitle.equals(workName)) {
+					goReserve = true;
+					break;
+				}
+
+			}
+			// On parcours ensuite la reservationList
+			for (Reservation result : memberResList) {
+
+				String resStatus = result.getStatus().toString();
+				Integer resWorkId = result.getWorkId();
+				// CAS N°4.4 : L'oeuvre de la réservation est la même que celle qu'on veut
+				// réserver mais est terminée
+				if ((resWorkId == workId) && (resStatus.equals("Terminée"))) {
+					goReserve = true;
+					break;
+				} else {
+					goReserve = false;
+				}
+			}
 		}
-		
+
 		if (goReserve) {
-			
-			Integer maxRes = myWorkGot.getMaxResAllowed();
-		
+
+			Integer nbReservation = myWorkGot.getReservationRealized();
+
+			 if(nbReservation < 5) {
+
 			Reservation reservationToSave = new Reservation();
-			//Association membre/Work à la reservation
-			reservationToSave.setWork(myWorkGot);
-			reservationToSave.setMemberReserving(membreEmprunt);
+			// Association membre/Work à la reservation
+			reservationToSave.setWorkId(workId);
+			reservationToSave.setMemberId(memberId); //
 			reservationToSave.setStartDate(new Date());
 			reservationToSave.setStatus(ReservationStatusEnum.PENDING.val());
-			//Décrémente la quantité réservable de l'oeuvre
-			maxRes = maxRes--;
-			myWorkGot.setMaxResAllowed(maxRes);
-			//Update maxRes de l'oeuvre
+			// Décrémente la quantité réservable de l'oeuvre
+			nbReservation = (nbReservation+1);
+			System.out.println("nbReservation ="+nbReservation);
+			myWorkGot.setReservationRealized(nbReservation);
+			// Update de l'oeuvre
 			workRepository.save(myWorkGot);
-			//save la res dans le repository
+			// save la res dans le repository
 			reservationRepository.save(reservationToSave);
-			
+
 			toReturn = true;
-			
-		}
-		
-		
-	
-		return toReturn;
+		} else
+			toReturn = false;
+	}
+
+	return toReturn;
+
 	}
 
 	@Override
 	public Boolean cancelReservation(Integer reservationId, Integer memberId) {
-		
+
 		Boolean toReturn = false;
 		Reservation resToCancel = reservationRepository.findById(reservationId).get();
-		Work workResToCancel = resToCancel.getWork();
-		Integer maxRes = workResToCancel.getMaxResAllowed();
-		//Set le status de la resa à "terminée"
+		Work workResToCancel = workRepository.findById(resToCancel.getWorkId()).get();
+		Integer maxRes = workResToCancel.getReservationRealized();
+		// Set le status de la resa à "terminée"
 		resToCancel.setStatus(ReservationStatusEnum.DONE.val());
-		//Rajoute +1 à quantité de resa possible
-		workResToCancel.setMaxResAllowed(maxRes++);
-		//Sauvegarde de l'oeuvre et de la resa dans repository
+		// Rajoute +1 à quantité de resa possible
+		workResToCancel.setReservationRealized(maxRes-1);
+		// Sauvegarde de l'oeuvre et de la resa dans repository
 		reservationRepository.save(resToCancel);
 		workRepository.save(workResToCancel);
 		toReturn = true;
 		return toReturn;
-		
-		
+
 	}
 
 }

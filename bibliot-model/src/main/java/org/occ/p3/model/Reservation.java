@@ -4,11 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -27,33 +25,23 @@ public class Reservation implements Serializable {
 	@Id
 	@GeneratedValue(generator = "gen_reservation", strategy = GenerationType.IDENTITY)
 	@SequenceGenerator(name = "gen_reservation", sequenceName = "seq_reservation", allocationSize = 1)
-	
 	private Integer id;
 	
 	private String status;
 	
 	private Date startDate;
 	
-	public String workTitle;
 	
-
-	@ManyToOne
-	private Member member;
+	private Integer memberId;
 	
-	@ManyToOne
-	private Work work;
+	
+	private Integer workId;
 
 	public String getStatus() {
 		return status;
 	}
 
-	public Member getMemberReserving() {
-		return member;
-	}
-
-	public void setMemberReserving(Member memberReserving) {
-		this.member = memberReserving;
-	}
+	
 
 	public void setStatus(String status) {
 		this.status = status;
@@ -67,14 +55,32 @@ public class Reservation implements Serializable {
 		this.startDate = startDate;
 	}
 
-	
-	public Work getWork() {
-		return work;
+
+
+	public Integer getMemberId() {
+		return memberId;
 	}
 
-	public void setWork(Work work) {
-		this.work = work;
+
+
+	public void setMemberId(Integer memberId) {
+		this.memberId = memberId;
 	}
+
+
+
+	public Integer getWorkId() {
+		return workId;
+	}
+
+
+
+	public void setWorkId(Integer workId) {
+		this.workId = workId;
+	}
+
+	
+
 	
 	
 	

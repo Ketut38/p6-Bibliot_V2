@@ -42,10 +42,10 @@ public interface ReservationWs {
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "reserveWork", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.ReserveWork")
-    @ResponseWrapper(localName = "reserveWorkResponse", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.ReserveWorkResponse")
-    @Action(input = "http://webservices.p3.occ.org/reservationWs/reserveWorkRequest", output = "http://webservices.p3.occ.org/reservationWs/reserveWorkResponse")
-    public Boolean reserveWork(
+    @RequestWrapper(localName = "cancelReservation", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.CancelReservation")
+    @ResponseWrapper(localName = "cancelReservationResponse", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.CancelReservationResponse")
+    @Action(input = "http://webservices.p3.occ.org/reservationWs/cancelReservationRequest", output = "http://webservices.p3.occ.org/reservationWs/cancelReservationResponse")
+    public Boolean cancelReservation(
         @WebParam(name = "arg0", targetNamespace = "")
         Integer arg0,
         @WebParam(name = "arg1", targetNamespace = "")
@@ -60,10 +60,10 @@ public interface ReservationWs {
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "cancelReservation", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.CancelReservation")
-    @ResponseWrapper(localName = "cancelReservationResponse", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.CancelReservationResponse")
-    @Action(input = "http://webservices.p3.occ.org/reservationWs/cancelReservationRequest", output = "http://webservices.p3.occ.org/reservationWs/cancelReservationResponse")
-    public Boolean cancelReservation(
+    @RequestWrapper(localName = "reserveWork", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.ReserveWork")
+    @ResponseWrapper(localName = "reserveWorkResponse", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.ReserveWorkResponse")
+    @Action(input = "http://webservices.p3.occ.org/reservationWs/reserveWorkRequest", output = "http://webservices.p3.occ.org/reservationWs/reserveWorkResponse")
+    public Boolean reserveWork(
         @WebParam(name = "arg0", targetNamespace = "")
         Integer arg0,
         @WebParam(name = "arg1", targetNamespace = "")

@@ -9,7 +9,7 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface ReservationRepository extends CrudRepository<Reservation, Integer>{
 	
-	List<Reservation> findByMember(Member member);
+	List<Reservation> findByMemberId(Integer memberId);
 	
 	Iterable<Reservation> findAll();
 

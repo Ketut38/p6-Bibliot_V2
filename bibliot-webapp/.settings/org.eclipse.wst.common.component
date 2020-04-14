@@ -22,10 +22,10 @@
         <dependent-module archiveName="web-service-client-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/web-service-client/web-service-client">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="bibliot-model-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/bibliot-model/bibliot-model">
+        <dependent-module archiveName="bibliot-service-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/bibliot-service/bibliot-service">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="bibliot-service-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/bibliot-service/bibliot-service">
+        <dependent-module archiveName="bibliot-model-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/bibliot-model/bibliot-model">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="bibliot-consumer-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/bibliot-consumer/bibliot-consumer">

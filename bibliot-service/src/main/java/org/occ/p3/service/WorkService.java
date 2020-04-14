@@ -12,7 +12,7 @@ public interface WorkService {
 
 	public boolean isReservable(Integer workId);
 	
-	public void setMaxReservable (Integer workId);
+	//public void setMaxReservable (Integer workId);
     
     
     	

@@ -21,27 +21,26 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 public class ReservationController {
-	
-	@Autowired
-	BorrowService borrowService;
-	@Autowired
-	UserService userService;
-	@Autowired
-	ReservationService reservationService;
 
+	/*
+	 * @Autowired BorrowService borrowService;
+	 * 
+	 * @Autowired UserService userService;
+	 * 
+	 * @Autowired ReservationService reservationService;
+	 */
 	BorrowWeb borrowWsService = new BorrowWeb();
 	BorrowWs borrowWs = borrowWsService.getBorrowWsPort();
 
 	UserWeb userWsService = new UserWeb();
 	UserWs userWs = userWsService.getUserWsPort();
-	
+
 	ReservationWeb reservationWsService = new ReservationWeb();
 	ReservationWs reservationWs = reservationWsService.getReservationWsPort();
-	
-	
-	@RequestMapping(value="/reservation/{workId}", method=RequestMethod.GET)
-	public ModelAndView borrowBook(HttpServletRequest request, @PathVariable("workId") Integer workId) {
 
+	@RequestMapping(value = "/doReservation/{workId}", method = RequestMethod.GET)
+	public ModelAndView reserveBook(HttpServletRequest request, @PathVariable("workId") Integer workId) {
+		System.out.println("texte recu = " + workId);
 		ModelAndView modelAndView = null;
 		Member memberCo = (Member) request.getSession().getAttribute("memberConnected");
 
@@ -58,13 +57,11 @@ public class ReservationController {
 			System.out.println("ResController");
 			Boolean reserveWork = reservationWs.reserveWork(workId, membreId);
 
-			
-
 			if (reserveWork == true) {
 
 				// lien vers jsp de recherche avec message de succès
 				List<org.occ.p3.webservices.Borrow> memberBorrowList = userWs.findBorrowListByMember(memberCo);
-						//userService.findBorrowListByMember(memberCo);
+				// userService.findBorrowListByMember(memberCo);
 				// Affichage de la borrowList dans un mav
 				modelAndView = new ModelAndView("borrowListPage");
 				modelAndView.addObject("memberborrowList", memberBorrowList);

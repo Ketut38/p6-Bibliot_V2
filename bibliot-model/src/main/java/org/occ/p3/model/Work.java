@@ -1,6 +1,7 @@
 package org.occ.p3.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +18,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
-@Table(name="work")
+@Table(name = "work")
 public class Work implements Serializable {
 
 	/**
@@ -26,40 +27,34 @@ public class Work implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-    @GeneratedValue(generator="gen_work", strategy = GenerationType.IDENTITY)
-    @SequenceGenerator(name="gen_work", sequenceName="seq_work", allocationSize=1)		
+	@GeneratedValue(generator = "gen_work", strategy = GenerationType.IDENTITY)
+	@SequenceGenerator(name = "gen_work", sequenceName = "seq_work", allocationSize = 1)
 	private Integer id;
-	
+
 	private String title;
-	
+
 	private String author;
-	
+
 	private Date publicationDate;
-	
+
 	private String bookDescription;
-	
-	private Integer maxResAllowed;
-	
-	private Boolean reservable = new Boolean(false); 
-	
-	
-	@OneToMany(mappedBy = "work")
-	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<Reservation> reservations;
-	
-	
-	@OneToMany(fetch=FetchType.EAGER)
+
+	private Integer reservationRealized;
+
+	private Boolean reservable = new Boolean(false);
+
+	@OneToMany(fetch = FetchType.EAGER)
 	private List<Book> booksList;
 
 	public Work() {
 		super();
 	}
-	
-	public Work(String title, String author){
+
+	public Work(String title, String author) {
 		this.title = title;
 		this.author = author;
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -108,21 +103,13 @@ public class Work implements Serializable {
 		this.booksList = booksList;
 	}
 	
-	public List<Reservation> getReservations() {
-		return reservations;
+
+	public Integer getReservationRealized() {
+		return reservationRealized;
 	}
 
-	public void setReservations(List<Reservation> reservations) {
-		this.reservations = reservations;
-	}
-	
-
-	public Integer getMaxResAllowed() {
-		return maxResAllowed;
-	}
-
-	public void setMaxResAllowed(Integer maxResAllowed) {
-		this.maxResAllowed = maxResAllowed;
+	public void setReservationRealized(Integer reservationRealized) {
+		this.reservationRealized = reservationRealized;
 	}
 
 	public boolean isReservable() {
@@ -132,7 +119,5 @@ public class Work implements Serializable {
 	public void setReservable(boolean reservable) {
 		this.reservable = reservable;
 	}
-
-
 
 }
