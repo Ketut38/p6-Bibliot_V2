@@ -41,12 +41,12 @@ public interface BookWs {
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getBookById", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.GetBookById")
-    @ResponseWrapper(localName = "getBookByIdResponse", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.GetBookByIdResponse")
-    @Action(input = "http://webservices.p3.occ.org/bookWs/getBookByIdRequest", output = "http://webservices.p3.occ.org/bookWs/getBookByIdResponse")
-    public Book getBookById(
+    @RequestWrapper(localName = "saveNewBook", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.SaveNewBook")
+    @ResponseWrapper(localName = "saveNewBookResponse", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.SaveNewBookResponse")
+    @Action(input = "http://webservices.p3.occ.org/bookWs/saveNewBookRequest", output = "http://webservices.p3.occ.org/bookWs/saveNewBookResponse")
+    public Book saveNewBook(
         @WebParam(name = "arg0", targetNamespace = "")
-        Integer arg0);
+        Book arg0);
 
     /**
      * 
@@ -56,11 +56,11 @@ public interface BookWs {
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "saveNewBook", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.SaveNewBook")
-    @ResponseWrapper(localName = "saveNewBookResponse", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.SaveNewBookResponse")
-    @Action(input = "http://webservices.p3.occ.org/bookWs/saveNewBookRequest", output = "http://webservices.p3.occ.org/bookWs/saveNewBookResponse")
-    public Book saveNewBook(
+    @RequestWrapper(localName = "getBookById", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.GetBookById")
+    @ResponseWrapper(localName = "getBookByIdResponse", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.GetBookByIdResponse")
+    @Action(input = "http://webservices.p3.occ.org/bookWs/getBookByIdRequest", output = "http://webservices.p3.occ.org/bookWs/getBookByIdResponse")
+    public Book getBookById(
         @WebParam(name = "arg0", targetNamespace = "")
-        Book arg0);
+        Integer arg0);
 
 }

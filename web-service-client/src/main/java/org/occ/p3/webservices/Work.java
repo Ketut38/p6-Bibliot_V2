@@ -25,10 +25,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="bookDescription" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="booksList" type="{http://webservices.p3.occ.org/}book" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
- *         &lt;element name="maxResAllowed" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="publicationDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="reservable" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
- *         &lt;element name="reservations" type="{http://webservices.p3.occ.org/}reservation" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="reservationRealized" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="title" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -44,10 +43,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "bookDescription",
     "booksList",
     "id",
-    "maxResAllowed",
     "publicationDate",
     "reservable",
-    "reservations",
+    "reservationRealized",
     "title"
 })
 public class Work {
@@ -57,12 +55,10 @@ public class Work {
     @XmlElement(nillable = true)
     protected List<Book> booksList;
     protected Integer id;
-    protected Integer maxResAllowed;
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar publicationDate;
     protected boolean reservable;
-    @XmlElement(nillable = true)
-    protected List<Reservation> reservations;
+    protected Integer reservationRealized;
     protected String title;
 
     /**
@@ -167,30 +163,6 @@ public class Work {
     }
 
     /**
-     * Obtient la valeur de la propriété maxResAllowed.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
-     */
-    public Integer getMaxResAllowed() {
-        return maxResAllowed;
-    }
-
-    /**
-     * Définit la valeur de la propriété maxResAllowed.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
-     */
-    public void setMaxResAllowed(Integer value) {
-        this.maxResAllowed = value;
-    }
-
-    /**
      * Obtient la valeur de la propriété publicationDate.
      * 
      * @return
@@ -231,32 +203,27 @@ public class Work {
     }
 
     /**
-     * Gets the value of the reservations property.
+     * Obtient la valeur de la propriété reservationRealized.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the reservations property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getReservations().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Reservation }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
      */
-    public List<Reservation> getReservations() {
-        if (reservations == null) {
-            reservations = new ArrayList<Reservation>();
-        }
-        return this.reservations;
+    public Integer getReservationRealized() {
+        return reservationRealized;
+    }
+
+    /**
+     * Définit la valeur de la propriété reservationRealized.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
+     */
+    public void setReservationRealized(Integer value) {
+        this.reservationRealized = value;
     }
 
     /**

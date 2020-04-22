@@ -54,9 +54,7 @@ public class WorkControler {
 	for (org.occ.p3.webservices.Work result : workByAuthor) {
 		
 		
-			List<org.occ.p3.webservices.Reservation> reservation = result.getReservations();
 			
-			System.out.println("taille liste réservation recue = " + reservation.size());
 			boolean workReservable = workWs.isReservable(result.getId());
 			result.setReservable(workReservable);
 

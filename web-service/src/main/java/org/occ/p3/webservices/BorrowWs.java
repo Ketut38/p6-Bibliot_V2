@@ -4,6 +4,8 @@ import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 
+import org.occ.p3.model.Member;
+import org.occ.p3.model.Reservation;
 import org.occ.p3.service.BorrowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +35,12 @@ BorrowService borrowService;
 	    return borrowService.terminateBorrow(borrowId, membreId);
 		
 		}
+	@WebMethod
+	public void sendMailToReservationMember(Member member, Reservation reservation) {
+	}
+	
 		
+	
 	@PostConstruct
 	public void init() {
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);

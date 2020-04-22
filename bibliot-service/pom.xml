@@ -1,51 +1,59 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>org.occ.p3</groupId>
-    <artifactId>p3-parent</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-  </parent>
-  
-  <build>
-  <plugins>
-    <plugin>
-      <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>1.6</source>
-          <target>1.6</target>
-        </configuration>
-    </plugin>
-  </plugins>
-</build>
-  
-  
-  <artifactId>bibliot-service</artifactId>
-  <name>bibliot-service</name>
-  
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.occ.p3</groupId>
+		<artifactId>p3-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+
+	<artifactId>bibliot-service</artifactId>
+	<name>bibliot-service</name>
+
 	<dependencies>
 
-	<dependency>
-		<groupId>org.occ.p3</groupId>
-		 <artifactId>bibliot-consumer</artifactId>
-	</dependency>
+		<dependency>
+			<groupId>org.occ.p3</groupId>
+			<artifactId>bibliot-consumer</artifactId>
+		</dependency>
 
-	<dependency>
-		<groupId>org.occ.p3</groupId>
-		 <artifactId>bibliot-model</artifactId>
-	</dependency>
-	
-        
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-        </dependency>
+		<dependency>
+			<groupId>org.occ.p3</groupId>
+			<artifactId>bibliot-model</artifactId>
+		</dependency>
 
-	<dependency>
-		<groupId>javax.mail</groupId>
-		<artifactId>mail</artifactId>
-		<version>1.5.0-b01</version>
-	</dependency>
-	
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.5.0-b01</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-collections4</artifactId>
+			<version>4.1</version>
+		</dependency>
+
 	</dependencies>
-  
+
 </project>

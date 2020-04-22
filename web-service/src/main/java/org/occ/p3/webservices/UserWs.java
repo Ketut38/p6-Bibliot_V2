@@ -8,6 +8,7 @@ import javax.jws.soap.SOAPBinding;
 
 import org.occ.p3.model.Borrow;
 import org.occ.p3.model.Member;
+import org.occ.p3.model.Reservation;
 import org.occ.p3.model.User;
 import org.occ.p3.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,16 @@ UserService userService;
 		return userService.findBorrowListByMember(member);
 		
 	}
+	@WebMethod
+	public Member findMember(Integer memberId) {
+		return userService.findMember(memberId);
+	}
+	
+	@WebMethod
+	public List<Reservation> findReservationListByMemberId (Integer memberId){
+		return userService.findReservationListByMemberId(memberId);
+	}
+	
 	
 	@PostConstruct
 	public void init() {

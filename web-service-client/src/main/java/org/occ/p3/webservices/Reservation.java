@@ -18,11 +18,10 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="workTitle" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="memberReserving" type="{http://webservices.p3.occ.org/}member" minOccurs="0"/>
+ *         &lt;element name="memberId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="startDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="status" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="work" type="{http://webservices.p3.occ.org/}work" minOccurs="0"/>
+ *         &lt;element name="workId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -33,67 +32,41 @@ import javax.xml.datatype.XMLGregorianCalendar;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "reservation", propOrder = {
-    "workTitle",
-    "memberReserving",
+    "memberId",
     "startDate",
     "status",
-    "work"
+    "workId"
 })
 public class Reservation {
 
-    protected String workTitle;
-    protected Member memberReserving;
+    protected Integer memberId;
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar startDate;
     protected String status;
-    protected Work work;
+    protected Integer workId;
 
     /**
-     * Obtient la valeur de la propriété workTitle.
+     * Obtient la valeur de la propriété memberId.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link Integer }
      *     
      */
-    public String getWorkTitle() {
-        return workTitle;
+    public Integer getMemberId() {
+        return memberId;
     }
 
     /**
-     * Définit la valeur de la propriété workTitle.
+     * Définit la valeur de la propriété memberId.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link Integer }
      *     
      */
-    public void setWorkTitle(String value) {
-        this.workTitle = value;
-    }
-
-    /**
-     * Obtient la valeur de la propriété memberReserving.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Member }
-     *     
-     */
-    public Member getMemberReserving() {
-        return memberReserving;
-    }
-
-    /**
-     * Définit la valeur de la propriété memberReserving.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Member }
-     *     
-     */
-    public void setMemberReserving(Member value) {
-        this.memberReserving = value;
+    public void setMemberId(Integer value) {
+        this.memberId = value;
     }
 
     /**
@@ -145,27 +118,27 @@ public class Reservation {
     }
 
     /**
-     * Obtient la valeur de la propriété work.
+     * Obtient la valeur de la propriété workId.
      * 
      * @return
      *     possible object is
-     *     {@link Work }
+     *     {@link Integer }
      *     
      */
-    public Work getWork() {
-        return work;
+    public Integer getWorkId() {
+        return workId;
     }
 
     /**
-     * Définit la valeur de la propriété work.
+     * Définit la valeur de la propriété workId.
      * 
      * @param value
      *     allowed object is
-     *     {@link Work }
+     *     {@link Integer }
      *     
      */
-    public void setWork(Work value) {
-        this.work = value;
+    public void setWorkId(Integer value) {
+        this.workId = value;
     }
 
 }

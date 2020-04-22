@@ -38,14 +38,6 @@
 			<groupId>org.occ.p3</groupId>
 			<artifactId>bibliot-service</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.occ.p3</groupId>
-			<artifactId>bibliot-model</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.occ.p3</groupId>
-			<artifactId>bibliot-consumer</artifactId>
-		</dependency>
 
 
 		<dependency>
@@ -95,6 +87,11 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>org.hibernate.common</groupId>
+			<artifactId>hibernate-commons-annotations</artifactId>
+			<version>5.0.1.Final</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.hibernate</groupId>

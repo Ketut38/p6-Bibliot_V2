@@ -38,14 +38,14 @@ public interface WorkWs {
      * 
      * @param arg0
      * @return
-     *     returns java.util.List<org.occ.p3.webservices.Work>
+     *     returns boolean
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getWorksByPublicationDate", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.GetWorksByPublicationDate")
-    @ResponseWrapper(localName = "getWorksByPublicationDateResponse", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.GetWorksByPublicationDateResponse")
-    @Action(input = "http://webservices.p3.occ.org/workWs/getWorksByPublicationDateRequest", output = "http://webservices.p3.occ.org/workWs/getWorksByPublicationDateResponse")
-    public List<Work> getWorksByPublicationDate(
+    @RequestWrapper(localName = "isReservable", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.IsReservable")
+    @ResponseWrapper(localName = "isReservableResponse", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.IsReservableResponse")
+    @Action(input = "http://webservices.p3.occ.org/workWs/isReservableRequest", output = "http://webservices.p3.occ.org/workWs/isReservableResponse")
+    public boolean isReservable(
         @WebParam(name = "arg0", targetNamespace = "")
         Integer arg0);
 
@@ -68,14 +68,14 @@ public interface WorkWs {
      * 
      * @param arg0
      * @return
-     *     returns boolean
+     *     returns java.util.List<org.occ.p3.webservices.Work>
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "isReservable", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.IsReservable")
-    @ResponseWrapper(localName = "isReservableResponse", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.IsReservableResponse")
-    @Action(input = "http://webservices.p3.occ.org/workWs/isReservableRequest", output = "http://webservices.p3.occ.org/workWs/isReservableResponse")
-    public boolean isReservable(
+    @RequestWrapper(localName = "getWorksByPublicationDate", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.GetWorksByPublicationDate")
+    @ResponseWrapper(localName = "getWorksByPublicationDateResponse", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.GetWorksByPublicationDateResponse")
+    @Action(input = "http://webservices.p3.occ.org/workWs/getWorksByPublicationDateRequest", output = "http://webservices.p3.occ.org/workWs/getWorksByPublicationDateResponse")
+    public List<Work> getWorksByPublicationDate(
         @WebParam(name = "arg0", targetNamespace = "")
         Integer arg0);
 

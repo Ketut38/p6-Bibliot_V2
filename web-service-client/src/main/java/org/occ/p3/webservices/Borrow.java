@@ -26,6 +26,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="memberBorrowing" type="{http://webservices.p3.occ.org/}member" minOccurs="0"/>
  *         &lt;element name="startBorrowDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="status" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="workId" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="workName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -45,6 +46,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "memberBorrowing",
     "startBorrowDate",
     "status",
+    "workId",
     "workName"
 })
 public class Borrow {
@@ -59,6 +61,7 @@ public class Borrow {
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar startBorrowDate;
     protected String status;
+    protected Integer workId;
     protected String workName;
 
     /**
@@ -243,6 +246,30 @@ public class Borrow {
      */
     public void setStatus(String value) {
         this.status = value;
+    }
+
+    /**
+     * Obtient la valeur de la propriété workId.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
+     */
+    public Integer getWorkId() {
+        return workId;
+    }
+
+    /**
+     * Définit la valeur de la propriété workId.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
+     */
+    public void setWorkId(Integer value) {
+        this.workId = value;
     }
 
     /**

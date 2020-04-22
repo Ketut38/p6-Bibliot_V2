@@ -3,6 +3,7 @@ package org.occ.p3.service;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.occ.p3.consumer.repository.BorrowRepository;
 import org.occ.p3.consumer.repository.MemberRepository;
 import org.occ.p3.consumer.repository.ReservationRepository;
@@ -47,8 +48,9 @@ public class ReservationServiceImpl implements ReservationService {
 		if (memberBorrowList.isEmpty() && memberResList.isEmpty()) {
 			goReserve = true;
 			// CAS N°2 : une liste de borrow mais pas de liste de réservation
-		} else if (!memberBorrowList.isEmpty() && memberResList.isEmpty()) {
+		} else if (CollectionUtils.isNotEmpty(memberBorrowList) && memberResList.isEmpty()) {
 			// On parcours la borrowList
+			Integer resListIndex = 1;
 			for (Borrow result : memberBorrowList) {
 
 				String borrowStatus = result.getStatus().toString();
@@ -60,31 +62,42 @@ public class ReservationServiceImpl implements ReservationService {
 					// "Rendu"
 				} else if (result.workTitle.equals(workName) && (borrowStatus != "Rendu")) {
 					goReserve = false;
+					break;
 					// CAS N°2.3 : Pas d'emprunt avec le même titre d'oeuvre
-				} else if (!result.workTitle.equals(workName)) {
+				} else if (!result.workTitle.equals(workName) && (resListIndex == memberResList.size())) {
 					goReserve = true;
 					break;
 				}
+				resListIndex++;
 
 			}
-			// CAS N°3 : pas de liste de borrow et une liste de réservation active
-		} else if ((memberBorrowList.isEmpty()) && (!memberResList.isEmpty())) {
+			// CAS N°3 : pas de liste de borrow et une liste de réservation active  CAS OK
+		} else if (memberBorrowList.isEmpty() && CollectionUtils.isNotEmpty(memberResList)) {
+			Integer resListIndex = 1;
 			for (Reservation result : memberResList) {
 
 				String resStatus = result.getStatus().toString();
 				Integer resWorkId = result.getWorkId();
-				// CAS N°3.1 : L'oeuvre de la réservation est la même que celle qu'on veut
-				// réserver mais est terminée
-				if ((resWorkId == workId) && (resStatus.equals("Terminée"))) {
+				
+				if (resWorkId != workId && (resListIndex == memberResList.size())){
 					goReserve = true;
 					break;
-
-				} else {
+					
+					
+					// CAS N°3.1 : L'oeuvre de la réservation est la même que celle qu'on veut
+					// réserver mais est terminée
+				} else if ((resWorkId == workId) && (resStatus.equals("Terminée"))) {
+					goReserve = true;
+					break;
+					
+					
+				}else {
 					goReserve = false;
 				}
+				resListIndex++;
 			}
 			// CAS N°4 : Une liste de borrow ET une liste de réservation active
-		} else if (!memberBorrowList.isEmpty() && (!memberResList.isEmpty())) {
+		} else if (CollectionUtils.isNotEmpty(memberBorrowList) && CollectionUtils.isNotEmpty(memberBorrowList)) {
 			// On parcours d'abord la borrowList
 			for (Borrow result : memberBorrowList) {
 

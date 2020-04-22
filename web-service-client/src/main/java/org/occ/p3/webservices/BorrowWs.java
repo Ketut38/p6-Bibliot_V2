@@ -84,4 +84,19 @@ public interface BorrowWs {
         @WebParam(name = "arg1", targetNamespace = "")
         Integer arg1);
 
+    /**
+     * 
+     * @param arg1
+     * @param arg0
+     */
+    @WebMethod
+    @RequestWrapper(localName = "sendMailToReservationMember", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.SendMailToReservationMember")
+    @ResponseWrapper(localName = "sendMailToReservationMemberResponse", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.SendMailToReservationMemberResponse")
+    @Action(input = "http://webservices.p3.occ.org/borrowWs/sendMailToReservationMemberRequest", output = "http://webservices.p3.occ.org/borrowWs/sendMailToReservationMemberResponse")
+    public void sendMailToReservationMember(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Member arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        Reservation arg1);
+
 }

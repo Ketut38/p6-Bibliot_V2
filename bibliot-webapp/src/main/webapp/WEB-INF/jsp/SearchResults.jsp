@@ -22,9 +22,9 @@
     <li>${work.bookDescription}</li>
 	<li> <a href="${pageContext.request.contextPath}/borrow/<c:out value="${work.id}"/> ">Emprunter ce livre</a></li>
 	<c:if test = "${work.reservable}"><li>
-	  <a href="${pageContext.request.contextPath}/reservation/<c:out value="${work.id}"/> ">Reserver ce livre </a>
+	  <a href="${pageContext.request.contextPath}/doReservation/<c:out value="${work.id}"/> ">Reserver ce livre </a>
       </li></c:if>
-    <li>Réservations en cours: <b>${fn:length(reservation)}</b></li>
+    <li>Réservations en cours: <b>${work.reservationRealized}</b></li>
 </ul>
 <hr>
     </c:forEach>

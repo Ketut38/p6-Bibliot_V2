@@ -38,16 +38,16 @@ public interface UserWs {
      * 
      * @param arg0
      * @return
-     *     returns java.util.List<org.occ.p3.webservices.Borrow>
+     *     returns org.occ.p3.webservices.Member
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "findBorrowListByMember", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.FindBorrowListByMember")
-    @ResponseWrapper(localName = "findBorrowListByMemberResponse", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.FindBorrowListByMemberResponse")
-    @Action(input = "http://webservices.p3.occ.org/userWs/findBorrowListByMemberRequest", output = "http://webservices.p3.occ.org/userWs/findBorrowListByMemberResponse")
-    public List<Borrow> findBorrowListByMember(
+    @RequestWrapper(localName = "findMember", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.FindMember")
+    @ResponseWrapper(localName = "findMemberResponse", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.FindMemberResponse")
+    @Action(input = "http://webservices.p3.occ.org/userWs/findMemberRequest", output = "http://webservices.p3.occ.org/userWs/findMemberResponse")
+    public Member findMember(
         @WebParam(name = "arg0", targetNamespace = "")
-        Member arg0);
+        Integer arg0);
 
     /**
      * 
@@ -66,5 +66,35 @@ public interface UserWs {
         String arg0,
         @WebParam(name = "arg1", targetNamespace = "")
         String arg1);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns java.util.List<org.occ.p3.webservices.Borrow>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "findBorrowListByMember", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.FindBorrowListByMember")
+    @ResponseWrapper(localName = "findBorrowListByMemberResponse", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.FindBorrowListByMemberResponse")
+    @Action(input = "http://webservices.p3.occ.org/userWs/findBorrowListByMemberRequest", output = "http://webservices.p3.occ.org/userWs/findBorrowListByMemberResponse")
+    public List<Borrow> findBorrowListByMember(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Member arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns java.util.List<org.occ.p3.webservices.Reservation>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "findReservationListByMemberId", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.FindReservationListByMemberId")
+    @ResponseWrapper(localName = "findReservationListByMemberIdResponse", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.FindReservationListByMemberIdResponse")
+    @Action(input = "http://webservices.p3.occ.org/userWs/findReservationListByMemberIdRequest", output = "http://webservices.p3.occ.org/userWs/findReservationListByMemberIdResponse")
+    public List<Reservation> findReservationListByMemberId(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Integer arg0);
 
 }

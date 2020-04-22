@@ -36,15 +36,11 @@ public class Borrow implements Serializable {
 
 	private boolean extended;
 
+	private Integer workId;
+	
 	public String workTitle;
 
-	public String getWorkName() {
-		return workTitle;
-	}
-
-	public void setWorkName(String workName) {
-		this.workTitle = workName;
-	}
+	
 
 	@ManyToOne
 	private Member member;
@@ -107,6 +103,22 @@ public class Borrow implements Serializable {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public Integer getWorkId() {
+		return workId;
+	}
+
+	public void setWorkId(Integer workId) {
+		this.workId = workId;
+	}
+	
+	public String getWorkName() {
+		return workTitle;
+	}
+
+	public void setWorkName(String workName) {
+		this.workTitle = workName;
 	}
 
 }

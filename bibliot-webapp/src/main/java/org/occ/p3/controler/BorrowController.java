@@ -21,10 +21,10 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class BorrowController{
 	
-@Autowired
+/*@Autowired
 BorrowService borrowService;
 @Autowired
-UserService userService;
+UserService userService;*/
 
 BorrowWeb borrowWsService = new BorrowWeb();
 BorrowWs borrowWs = borrowWsService.getBorrowWsPort();
