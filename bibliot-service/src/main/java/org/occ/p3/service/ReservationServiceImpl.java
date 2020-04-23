@@ -42,15 +42,18 @@ public class ReservationServiceImpl implements ReservationService {
 
 		// on recupère la liste de réservation du membre
 		List<Reservation> memberResList = reservationRepository.findByMemberId(memberId);
+		
+		
+		//********************************** RESERVATION VALIDATION ALGO **********************************//
 
 		boolean goReserve = false;
 		// CAS N°1 : aucun borrow et aucune réservation
 		if (memberBorrowList.isEmpty() && memberResList.isEmpty()) {
 			goReserve = true;
-			// CAS N°2 : une liste de borrow mais pas de liste de réservation
+			// CAS N°2 : une liste de borrow mais pas de liste de réservation CAS OK
 		} else if (CollectionUtils.isNotEmpty(memberBorrowList) && memberResList.isEmpty()) {
 			// On parcours la borrowList
-			Integer resListIndex = 1;
+			Integer borrowListIndex = 1;
 			for (Borrow result : memberBorrowList) {
 
 				String borrowStatus = result.getStatus().toString();
@@ -58,108 +61,119 @@ public class ReservationServiceImpl implements ReservationService {
 				if ((result.workTitle.equals(workName)) && (borrowStatus.equals("Rendu"))) {
 					goReserve = true;
 					break;
-					// CAS N°2.2 : un emprunt avec le meme titre d'oeuvre existe et n'a pas été
-					// "Rendu"
+					// CAS N°2.2 : un emprunt avec le meme titre d'oeuvre existe et n'a pas été "Rendu"
 				} else if (result.workTitle.equals(workName) && (borrowStatus != "Rendu")) {
 					goReserve = false;
 					break;
 					// CAS N°2.3 : Pas d'emprunt avec le même titre d'oeuvre
-				} else if (!result.workTitle.equals(workName) && (resListIndex == memberResList.size())) {
+				} else if (!result.workTitle.equals(workName) && (borrowListIndex == memberBorrowList.size())) {
 					goReserve = true;
 					break;
 				}
-				resListIndex++;
+				borrowListIndex++;
 
 			}
-			// CAS N°3 : pas de liste de borrow et une liste de réservation active  CAS OK
+			// CAS N°3 : pas de liste de borrow et une liste de réservation active CAS OK
 		} else if (memberBorrowList.isEmpty() && CollectionUtils.isNotEmpty(memberResList)) {
 			Integer resListIndex = 1;
 			for (Reservation result : memberResList) {
 
 				String resStatus = result.getStatus().toString();
 				Integer resWorkId = result.getWorkId();
-				
-				if (resWorkId != workId && (resListIndex == memberResList.size())){
+
+				if (resWorkId != workId && (resListIndex == memberResList.size())) {
 					goReserve = true;
 					break;
-					
-					
-					// CAS N°3.1 : L'oeuvre de la réservation est la même que celle qu'on veut
-					// réserver mais est terminée
+
+					// CAS N°3.1 : L'oeuvre de la réservation est la même que celle qu'on veut réserver mais est terminée
 				} else if ((resWorkId == workId) && (resStatus.equals("Terminée"))) {
 					goReserve = true;
 					break;
-					
-					
-				}else {
+
+				} else {
 					goReserve = false;
 				}
 				resListIndex++;
 			}
 			// CAS N°4 : Une liste de borrow ET une liste de réservation active
 		} else if (CollectionUtils.isNotEmpty(memberBorrowList) && CollectionUtils.isNotEmpty(memberBorrowList)) {
-			// On parcours d'abord la borrowList
+
+			Integer borrowListIndex = 1;
 			for (Borrow result : memberBorrowList) {
 
 				String borrowStatus = result.getStatus().toString();
-				// CAS N°4.1 : un emprunt avec le meme titre d'oeuvre existe mais deja rendu
+				// CAS N°2.1 : un emprunt avec le meme titre d'oeuvre existe mais deja rendu
 				if ((result.workTitle.equals(workName)) && (borrowStatus.equals("Rendu"))) {
 					goReserve = true;
 					break;
-					// CAS N°4.2 : un emprunt avec le meme titre d'oeuvre existe et n'a pas été
-					// "Rendu"
+					// CAS N°2.2 : un emprunt avec le meme titre d'oeuvre existe et n'a pas été "Rendu"
 				} else if (result.workTitle.equals(workName) && (borrowStatus != "Rendu")) {
 					goReserve = false;
-					// CAS N°4.3 : Pas d'emprunt avec le même titre d'oeuvre
-				} else if (!result.workTitle.equals(workName)) {
+					break;
+					// CAS N°2.3 : Pas d'emprunt avec le même titre d'oeuvre
+				} else if (!result.workTitle.equals(workName) && (borrowListIndex == memberBorrowList.size())) {
 					goReserve = true;
 					break;
 				}
+				borrowListIndex++;
 
 			}
-			// On parcours ensuite la reservationList
-			for (Reservation result : memberResList) {
 
-				String resStatus = result.getStatus().toString();
-				Integer resWorkId = result.getWorkId();
-				// CAS N°4.4 : L'oeuvre de la réservation est la même que celle qu'on veut
-				// réserver mais est terminée
-				if ((resWorkId == workId) && (resStatus.equals("Terminée"))) {
-					goReserve = true;
-					break;
-				} else {
-					goReserve = false;
+			if (goReserve) {
+				// On parcours ensuite la reservationList
+				Integer resListIndex = 1;
+				for (Reservation result : memberResList) {
+
+					String resStatus = result.getStatus().toString();
+					Integer resWorkId = result.getWorkId();
+
+					if (resWorkId != workId && (resListIndex == memberResList.size())) {
+						goReserve = true;
+						break;
+
+						// CAS N°3.1 : L'oeuvre de la réservation est la même que celle qu'on veut
+						// réserver mais est terminée
+					} else if ((resWorkId == workId) && (resStatus.equals("Terminée"))) {
+						goReserve = true;
+						break;
+
+					} else {
+						goReserve = false;
+					}
+					resListIndex++;
 				}
 			}
 		}
+		
+		//********************************** END OF VALIDATION ALGO **********************************//
 
 		if (goReserve) {
 
 			Integer nbReservation = myWorkGot.getReservationRealized();
 
-			 if(nbReservation < 5) {
+			if (nbReservation < 5) {
 
-			Reservation reservationToSave = new Reservation();
-			// Association membre/Work à la reservation
-			reservationToSave.setWorkId(workId);
-			reservationToSave.setMemberId(memberId); //
-			reservationToSave.setStartDate(new Date());
-			reservationToSave.setStatus(ReservationStatusEnum.PENDING.val());
-			// Décrémente la quantité réservable de l'oeuvre
-			nbReservation = (nbReservation+1);
-			System.out.println("nbReservation ="+nbReservation);
-			myWorkGot.setReservationRealized(nbReservation);
-			// Update de l'oeuvre
-			workRepository.save(myWorkGot);
-			// save la res dans le repository
-			reservationRepository.save(reservationToSave);
+				Reservation reservationToSave = new Reservation();
+				// Association membre/Work à la reservation
+				reservationToSave.setWorkId(workId);
+				reservationToSave.setMemberId(memberId); //
+				reservationToSave.setStartDate(new Date());
+				reservationToSave.setStatus(ReservationStatusEnum.PENDING.val());
+				// Décrémente la quantité réservable de l'oeuvre
+				nbReservation = (nbReservation + 1);
+				System.out.println("nbReservation =" + nbReservation);
+				myWorkGot.setReservationRealized(nbReservation);
+				// Update de l'oeuvre
+				workRepository.save(myWorkGot);
+				// save la res dans le repository
+				reservationRepository.save(reservationToSave);
 
-			toReturn = true;
-		} else
-			toReturn = false;
-	}
+				toReturn = true;
+			} else
+				toReturn = false;
+		}
 
-	return toReturn;
+		return toReturn;
 
 	}
 
@@ -173,7 +187,7 @@ public class ReservationServiceImpl implements ReservationService {
 		// Set le status de la resa à "terminée"
 		resToCancel.setStatus(ReservationStatusEnum.DONE.val());
 		// Rajoute +1 à quantité de resa possible
-		workResToCancel.setReservationRealized(maxRes-1);
+		workResToCancel.setReservationRealized(maxRes - 1);
 		// Sauvegarde de l'oeuvre et de la resa dans repository
 		reservationRepository.save(resToCancel);
 		workRepository.save(workResToCancel);
