@@ -35,21 +35,6 @@ public interface BorrowWs {
 
     /**
      * 
-     * @param arg0
-     * @return
-     *     returns java.lang.Boolean
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "extendBorrow", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.ExtendBorrow")
-    @ResponseWrapper(localName = "extendBorrowResponse", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.ExtendBorrowResponse")
-    @Action(input = "http://webservices.p3.occ.org/borrowWs/extendBorrowRequest", output = "http://webservices.p3.occ.org/borrowWs/extendBorrowResponse")
-    public Boolean extendBorrow(
-        @WebParam(name = "arg0", targetNamespace = "")
-        Integer arg0);
-
-    /**
-     * 
      * @param arg1
      * @param arg0
      * @return
@@ -83,6 +68,21 @@ public interface BorrowWs {
         Integer arg0,
         @WebParam(name = "arg1", targetNamespace = "")
         Integer arg1);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns java.lang.Boolean
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "extendBorrow", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.ExtendBorrow")
+    @ResponseWrapper(localName = "extendBorrowResponse", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.ExtendBorrowResponse")
+    @Action(input = "http://webservices.p3.occ.org/borrowWs/extendBorrowRequest", output = "http://webservices.p3.occ.org/borrowWs/extendBorrowResponse")
+    public Boolean extendBorrow(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Integer arg0);
 
     /**
      * 

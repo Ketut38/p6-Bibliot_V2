@@ -90,10 +90,10 @@ public class ReservationController {
 		if (memberCo == null) {
 			// Si pas de membre co on renvoie vers la page de connexion
 			modelAndView = new ModelAndView("connexion");
-			modelAndView.addObject("msg", "Veuillez vous connecter pour afficher vos prêts en cours");
+			modelAndView.addObject("msg", "Veuillez vous connecter pour afficher vos réservations en cours");
 		} else {
 			
-			// On recupère sa borrowList
+			// On recupère sa reservationList
 			Integer membreId = memberCo.getId();
 			List<org.occ.p3.webservices.Reservation> memberResList = userWs.findReservationListByMemberId(membreId);
 					//userService.findBorrowListByMember(memberCo);

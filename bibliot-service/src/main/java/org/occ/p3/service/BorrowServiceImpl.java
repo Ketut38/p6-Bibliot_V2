@@ -152,19 +152,26 @@ public class BorrowServiceImpl implements BorrowService {
 		Borrow borrowToEnd = borrowRepository.findById(borrowId).get();
 		Integer workBorrowId = borrowToEnd.getWorkId();
 		List<Reservation> reservationList = reservationRepository.findByWorkId(workBorrowId);
+		
+		if((reservationList != null) && !reservationList.isEmpty()) {
 
 		// retourne la reservation la plus ancienne
 		Reservation oldestRes = Collections.min(reservationList,
 				Comparator.comparing(reservation -> reservation.getStartDate()));
 
 		oldestRes.setStatus(ReservationStatusEnum.WAITING.val());
+		reservationRepository.save(oldestRes);
 
 		// On envoie un mail au membre concerné par la reservation
 		Member memberToMail = userService.findMember(oldestRes.getMemberId());
 		
+		System.out.println("About to send a mail to" + memberToMail.getName());
+		
 		sendMailToReservationMember(memberToMail,oldestRes);
 		
-
+		System.out.println("mail sent");
+		}
+		
 		borrowToEnd.setStatus(BorrowStatusEnum.RENDU.val());
 		// Set le book comme disponible
 		Book returnedBook = borrowToEnd.getBook();
@@ -203,7 +210,7 @@ public class BorrowServiceImpl implements BorrowService {
 			// Setting the recepients from the address variable
 			msg.setRecipients(Message.RecipientType.TO, memberMail);
 			String timeStamp = new SimpleDateFormat("yyyymmdd_hh-mm-ss").format(new Date());
-			msg.setSubject(workReserved.getTitle() + "est disponible !");
+			msg.setSubject(workReserved.getTitle() + "est disponible !  "+timeStamp);
 			msg.setSentDate(new Date());
 			msg.setText("L'oeuvre" + workReserved.getTitle() + "que vous avez reservée le" + reservation.getStartDate()
 					+ "est disponible, merci de vous connecter sur l'application pour confirmer votre emprunt");

@@ -42,9 +42,8 @@ public class ReservationServiceImpl implements ReservationService {
 
 		// on recupère la liste de réservation du membre
 		List<Reservation> memberResList = reservationRepository.findByMemberId(memberId);
-		
-		
-		//********************************** RESERVATION VALIDATION ALGO **********************************//
+
+		// ********************************** RESERVATION VALIDATION ALGO **********************************//
 
 		boolean goReserve = false;
 		// CAS N°1 : aucun borrow et aucune réservation
@@ -53,99 +52,41 @@ public class ReservationServiceImpl implements ReservationService {
 			// CAS N°2 : une liste de borrow mais pas de liste de réservation CAS OK
 		} else if (CollectionUtils.isNotEmpty(memberBorrowList) && memberResList.isEmpty()) {
 			// On parcours la borrowList
-			Integer borrowListIndex = 1;
-			for (Borrow result : memberBorrowList) {
 
-				String borrowStatus = result.getStatus().toString();
-				// CAS N°2.1 : un emprunt avec le meme titre d'oeuvre existe mais deja rendu
-				if ((result.workTitle.equals(workName)) && (borrowStatus.equals("Rendu"))) {
-					goReserve = true;
-					break;
-					// CAS N°2.2 : un emprunt avec le meme titre d'oeuvre existe et n'a pas été "Rendu"
-				} else if (result.workTitle.equals(workName) && (borrowStatus != "Rendu")) {
-					goReserve = false;
-					break;
-					// CAS N°2.3 : Pas d'emprunt avec le même titre d'oeuvre
-				} else if (!result.workTitle.equals(workName) && (borrowListIndex == memberBorrowList.size())) {
-					goReserve = true;
-					break;
-				}
-				borrowListIndex++;
+			if (isWorkIsBorrowed(workId, memberBorrowList)) {
 
-			}
-			// CAS N°3 : pas de liste de borrow et une liste de réservation active CAS OK
-		} else if (memberBorrowList.isEmpty() && CollectionUtils.isNotEmpty(memberResList)) {
-			Integer resListIndex = 1;
-			for (Reservation result : memberResList) {
+				goReserve = false;
 
-				String resStatus = result.getStatus().toString();
-				Integer resWorkId = result.getWorkId();
+			} else {
 
-				if (resWorkId != workId && (resListIndex == memberResList.size())) {
-					goReserve = true;
-					break;
-
-					// CAS N°3.1 : L'oeuvre de la réservation est la même que celle qu'on veut réserver mais est terminée
-				} else if ((resWorkId == workId) && (resStatus.equals("Terminée"))) {
-					goReserve = true;
-					break;
-
-				} else {
-					goReserve = false;
-				}
-				resListIndex++;
-			}
-			// CAS N°4 : Une liste de borrow ET une liste de réservation active
-		} else if (CollectionUtils.isNotEmpty(memberBorrowList) && CollectionUtils.isNotEmpty(memberBorrowList)) {
-
-			Integer borrowListIndex = 1;
-			for (Borrow result : memberBorrowList) {
-
-				String borrowStatus = result.getStatus().toString();
-				// CAS N°2.1 : un emprunt avec le meme titre d'oeuvre existe mais deja rendu
-				if ((result.workTitle.equals(workName)) && (borrowStatus.equals("Rendu"))) {
-					goReserve = true;
-					break;
-					// CAS N°2.2 : un emprunt avec le meme titre d'oeuvre existe et n'a pas été "Rendu"
-				} else if (result.workTitle.equals(workName) && (borrowStatus != "Rendu")) {
-					goReserve = false;
-					break;
-					// CAS N°2.3 : Pas d'emprunt avec le même titre d'oeuvre
-				} else if (!result.workTitle.equals(workName) && (borrowListIndex == memberBorrowList.size())) {
-					goReserve = true;
-					break;
-				}
-				borrowListIndex++;
-
-			}
-
-			if (goReserve) {
-				// On parcours ensuite la reservationList
-				Integer resListIndex = 1;
-				for (Reservation result : memberResList) {
-
-					String resStatus = result.getStatus().toString();
-					Integer resWorkId = result.getWorkId();
-
-					if (resWorkId != workId && (resListIndex == memberResList.size())) {
-						goReserve = true;
-						break;
-
-						// CAS N°3.1 : L'oeuvre de la réservation est la même que celle qu'on veut
-						// réserver mais est terminée
-					} else if ((resWorkId == workId) && (resStatus.equals("Terminée"))) {
-						goReserve = true;
-						break;
-
-					} else {
-						goReserve = false;
-					}
-					resListIndex++;
-				}
+				goReserve = true;
 			}
 		}
+
+		// CAS N°3 : pas de liste de borrow et une liste de réservation active CAS OK
+		else if (memberBorrowList.isEmpty() && CollectionUtils.isNotEmpty(memberResList)) {
+
+			if (isWorkIsReserved(workId, memberResList)) {
+				goReserve = false;
+			}else {
+
+				goReserve = true;
+			}
+
+			// CAS N°4 : Une liste de borrow ET une liste de réservation active
+		} else if (CollectionUtils.isNotEmpty(memberBorrowList) && CollectionUtils.isNotEmpty(memberResList)) {
+			Boolean workIsBorrowed = isWorkIsBorrowed(workId,memberBorrowList);
+			Boolean workIsReserved = isWorkIsReserved(workId, memberResList);
+			
+			if(!workIsBorrowed && !workIsReserved) {
+				goReserve = true;
+			}else {
+				goReserve = false;
+			}
 		
-		//********************************** END OF VALIDATION ALGO **********************************//
+		}
+
+		// ********************************** END OF VALIDATION ALGO **********************************//
 
 		if (goReserve) {
 
@@ -169,8 +110,10 @@ public class ReservationServiceImpl implements ReservationService {
 				reservationRepository.save(reservationToSave);
 
 				toReturn = true;
-			} else
+			} else {
 				toReturn = false;
+			}
+
 		}
 
 		return toReturn;
@@ -192,6 +135,48 @@ public class ReservationServiceImpl implements ReservationService {
 		reservationRepository.save(resToCancel);
 		workRepository.save(workResToCancel);
 		toReturn = true;
+		return toReturn;
+
+	}
+
+	private Boolean isWorkIsReserved(Integer workId, List<Reservation> memberResList) {
+
+		Boolean toReturn = false;
+
+		for (Reservation result : memberResList) {
+
+			if (!result.getStatus().equals("Terminé")) {
+
+				if (result.getWorkId() == workId) {
+
+					toReturn = true;
+
+				}
+
+			}
+		}
+
+		return toReturn;
+
+	}
+
+	private Boolean isWorkIsBorrowed(Integer workId, List<Borrow> memberBorrowList) {
+
+		Boolean toReturn = false;
+
+		for (Borrow result : memberBorrowList) {
+
+			if (!result.getStatus().equals("Rendu")) {
+
+				if (result.getWorkId() == workId) {
+
+					toReturn = true;
+
+				}
+
+			}
+		}
+
 		return toReturn;
 
 	}
