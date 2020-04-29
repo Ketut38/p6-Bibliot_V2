@@ -66,7 +66,7 @@ public class BorrowServiceImpl implements BorrowService {
 
 				Borrow borrowToSave = new Borrow();
 				borrowToSave.setBook(result);
-				// on recupère l'Id du membre passé en parametre
+				// on recupï¿½re l'Id du membre passï¿½ en parametre
 				Member membreEmprunt = memberRepository.findById(membreId).get();
 
 				// On associe le member a borrow
@@ -80,8 +80,8 @@ public class BorrowServiceImpl implements BorrowService {
 				calendar.add(Calendar.WEEK_OF_MONTH, 4);
 				borrowToSave.setEndBorrowDate(calendar.getTime());
 
-				// Set le statut de l'emprunt + Ajout du nom de l'oeuvre à l'emprunt +
-				// décrémente MaxResAllowed
+				// Set le statut de l'emprunt + Ajout du nom de l'oeuvre ï¿½ l'emprunt +
+				// dï¿½crï¿½mente MaxResAllowed
 
 				borrowToSave.setStatus(BorrowStatusEnum.ENCOURS.val());
 				borrowToSave.setWorkId(workId);
@@ -162,7 +162,7 @@ public class BorrowServiceImpl implements BorrowService {
 		oldestRes.setStatus(ReservationStatusEnum.WAITING.val());
 		reservationRepository.save(oldestRes);
 
-		// On envoie un mail au membre concerné par la reservation
+		// On envoie un mail au membre concernï¿½ par la reservation
 		Member memberToMail = userService.findMember(oldestRes.getMemberId());
 		
 		System.out.println("About to send a mail to" + memberToMail.getName());
@@ -189,6 +189,7 @@ public class BorrowServiceImpl implements BorrowService {
 		Properties props = new Properties();
 		props.put("mail.smtp.host", "true");
 		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
 		props.put("mail.smtp.host", "smtp.gmail.com");
 		props.put("mail.smtp.port", "587");
 		props.put("mail.smtp.auth", "true");
@@ -209,11 +210,11 @@ public class BorrowServiceImpl implements BorrowService {
 
 			// Setting the recepients from the address variable
 			msg.setRecipients(Message.RecipientType.TO, memberMail);
-			String timeStamp = new SimpleDateFormat("yyyymmdd_hh-mm-ss").format(new Date());
-			msg.setSubject(workReserved.getTitle() + "est disponible !  "+timeStamp);
+			//String timeStamp = new SimpleDateFormat("yyyy-mm-dd").format(new Date());
+			msg.setSubject(workReserved.getTitle() + " est disponible !  ");
 			msg.setSentDate(new Date());
-			msg.setText("L'oeuvre" + workReserved.getTitle() + "que vous avez reservée le" + reservation.getStartDate()
-					+ "est disponible, merci de vous connecter sur l'application pour confirmer votre emprunt");
+			msg.setText("Bonjour " +member.getName()+","+"\n"+"L'oeuvre " + workReserved.getTitle() + " que vous avez reservÃ©e le " + reservation.getStartDate()
+			+ " est disponible, merci de vous connecter sur l'application pour confirmer votre emprunt");
 			msg.setHeader("XPriority", "1");
 			Transport.send(msg);
 			System.out.println("Mail has been sent successfully");
