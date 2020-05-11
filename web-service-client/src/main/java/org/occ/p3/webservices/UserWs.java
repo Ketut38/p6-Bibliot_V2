@@ -71,21 +71,6 @@ public interface UserWs {
      * 
      * @param arg0
      * @return
-     *     returns java.util.List<org.occ.p3.webservices.Borrow>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "findBorrowListByMember", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.FindBorrowListByMember")
-    @ResponseWrapper(localName = "findBorrowListByMemberResponse", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.FindBorrowListByMemberResponse")
-    @Action(input = "http://webservices.p3.occ.org/userWs/findBorrowListByMemberRequest", output = "http://webservices.p3.occ.org/userWs/findBorrowListByMemberResponse")
-    public List<Borrow> findBorrowListByMember(
-        @WebParam(name = "arg0", targetNamespace = "")
-        Member arg0);
-
-    /**
-     * 
-     * @param arg0
-     * @return
      *     returns java.util.List<org.occ.p3.webservices.Reservation>
      */
     @WebMethod
@@ -96,5 +81,20 @@ public interface UserWs {
     public List<Reservation> findReservationListByMemberId(
         @WebParam(name = "arg0", targetNamespace = "")
         Integer arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns java.util.List<org.occ.p3.webservices.Borrow>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "findBorrowListByMember", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.FindBorrowListByMember")
+    @ResponseWrapper(localName = "findBorrowListByMemberResponse", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.FindBorrowListByMemberResponse")
+    @Action(input = "http://webservices.p3.occ.org/userWs/findBorrowListByMemberRequest", output = "http://webservices.p3.occ.org/userWs/findBorrowListByMemberResponse")
+    public List<Borrow> findBorrowListByMember(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Member arg0);
 
 }

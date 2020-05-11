@@ -54,23 +54,21 @@ public class WorkServiceImpl implements WorkService {
 		return isReservable;
 	}
 
-	/*
-	 * @Override public void setMaxReservable(Integer workId) {
-	 * 
-	 * // Recuperer le Work dont on connait l'ID Work myWorkGot =
-	 * workRepository.findById(workId).get(); List<Book> bookList =
-	 * myWorkGot.getBooksList();
-	 * 
-	 * Integer maxReservable = 0; Integer nbExemplaire = 0;
-	 * 
-	 * for (Book result : bookList) {
-	 * 
-	 * if (result != null) { nbExemplaire++; } }
-	 * 
-	 * maxReservable = nbExemplaire * 2;
-	 * 
-	 * myWorkGot.set
-	 * 
-	 * }
-	 */
+	@Override
+	public boolean isBorrowable(Integer workId) {
+
+		boolean isBorrowable = false;
+
+		Work work = workRepository.findById(workId).get();
+
+		List<Book> workBookList = work.getBooksList();
+
+		for (Book book : workBookList) {
+			if (book.isAvailable()) {
+				isBorrowable = true;
+			}
+		}
+		return isBorrowable;
+	}
+
 }

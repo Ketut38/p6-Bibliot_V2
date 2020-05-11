@@ -9,6 +9,7 @@ public interface BorrowService {
 	public Boolean extendBorrow(Integer borrowId);
 	public Boolean terminateBorrow(Integer borrowId, Integer membreId);
 	public void sendMailToReservationMember(Member member, Reservation reservation);
+	public Boolean borrowReservation (Integer reservationId, Integer membreId);
 
 
 }

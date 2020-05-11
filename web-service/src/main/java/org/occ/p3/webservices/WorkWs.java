@@ -35,6 +35,10 @@ public class WorkWs {
     public boolean isReservable(Integer workId) {
     	return workService.isReservable(workId);
     }
+    @WebMethod
+    public boolean isBorrowable(Integer workId) {
+    	return workService.isBorrowable(workId);
+    }
     
     @PostConstruct
 	public void init() {

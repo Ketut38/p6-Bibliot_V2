@@ -42,6 +42,8 @@ public class Work implements Serializable {
 	private Integer reservationRealized;
 
 	private Boolean reservable = new Boolean(false);
+	
+	private Boolean borrowable = new Boolean(false);
 
 	@OneToMany(fetch = FetchType.EAGER)
 	private List<Book> booksList;
@@ -118,6 +120,14 @@ public class Work implements Serializable {
 
 	public void setReservable(boolean reservable) {
 		this.reservable = reservable;
+	}
+
+	public boolean isBorrowable() {
+		return borrowable;
+	}
+
+	public void setBorrowable(boolean borrowable) {
+		this.borrowable = borrowable;
 	}
 
 }

@@ -3,6 +3,7 @@ package org.occ.p3.controler;
 import java.util.List;
 
 import org.occ.p3.model.Reservation;
+import org.occ.p3.webservices.Book;
 import org.occ.p3.webservices.WorkWeb;
 import org.occ.p3.webservices.WorkWs;
 import org.springframework.stereotype.Controller;
@@ -25,7 +26,7 @@ public class WorkControler {
 
 	public @ResponseBody
 
-		List<org.occ.p3.webservices.Work> getWorksByAuthor(@PathVariable String author) {
+			List<org.occ.p3.webservices.Work> getWorksByAuthor(@PathVariable String author) {
 		List<org.occ.p3.webservices.Work> workByAuthor = workWs.getWorksByAuthor(author);
 		return workByAuthor;
 	}
@@ -48,15 +49,16 @@ public class WorkControler {
 	public ModelAndView search(@RequestParam("searchText") String searchText) {
 
 		System.out.println("texte recu = " + searchText);
-		
-		List<org.occ.p3.webservices.Work> workByAuthor = workWs.getWorksByAuthor(searchText);	
-		
-	for (org.occ.p3.webservices.Work result : workByAuthor) {
-		
-		
-			
+
+		List<org.occ.p3.webservices.Work> workByAuthor = workWs.getWorksByAuthor(searchText);
+
+		for (org.occ.p3.webservices.Work result : workByAuthor) {
+
 			boolean workReservable = workWs.isReservable(result.getId());
 			result.setReservable(workReservable);
+			
+			boolean workBookable = workWs.isBorrowable(result.getId());
+			result.setBorrowable(workBookable);
 
 		}
 

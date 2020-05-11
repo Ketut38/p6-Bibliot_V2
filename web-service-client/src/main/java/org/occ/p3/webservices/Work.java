@@ -24,6 +24,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="author" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="bookDescription" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="booksList" type="{http://webservices.p3.occ.org/}book" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="borrowable" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="publicationDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="reservable" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
@@ -42,6 +43,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "author",
     "bookDescription",
     "booksList",
+    "borrowable",
     "id",
     "publicationDate",
     "reservable",
@@ -54,6 +56,7 @@ public class Work {
     protected String bookDescription;
     @XmlElement(nillable = true)
     protected List<Book> booksList;
+    protected boolean borrowable;
     protected Integer id;
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar publicationDate;
@@ -136,6 +139,22 @@ public class Work {
             booksList = new ArrayList<Book>();
         }
         return this.booksList;
+    }
+
+    /**
+     * Obtient la valeur de la propriété borrowable.
+     * 
+     */
+    public boolean isBorrowable() {
+        return borrowable;
+    }
+
+    /**
+     * Définit la valeur de la propriété borrowable.
+     * 
+     */
+    public void setBorrowable(boolean value) {
+        this.borrowable = value;
     }
 
     /**
