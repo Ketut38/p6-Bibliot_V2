@@ -115,8 +115,7 @@ public class BorrowServiceImpl implements BorrowService {
 			myWorkGot.setReservable(true);
 			workRepository.save(myWorkGot);
 		}
-		// Si reserveration avec workID existe changer ce statut à validée
-		List<Reservation> reservations =  reservationRepository.findByWorkId(workId);
+		
 		
 		return toReturn;
 	}
