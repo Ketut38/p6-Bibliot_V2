@@ -22,9 +22,12 @@
 <ul>
     
     <li>Statut: <strong>${reservation.status}</strong></li>
+    <li>N°: <strong>${reservation.id}</strong></li>
     <li>Id de l'oeuvre: <strong>${reservation.workId}</strong></li>
     <li>Date de réservation: <b><fmt:formatDate value="${reservation.startDate.toGregorianCalendar().time}" pattern="dd-MM-yyyy"/></b></li>
-    
+    <c:if test="${reservation.status eq 'En attente' }">
+		<li> <a href="${pageContext.request.contextPath}/borrowReservation/<c:out value="${reservation.id}"/> ">Confirmer la réservation</a></li>
+    </c:if>
     <%-- <c:if test="${reservation.status ne 'Terminée' }">
 		<li> <a href="${pageContext.request.contextPath}/cancelReservation/<c:out value="${reservation.id}"/> ">Annuler la réservation</a></li>
     </c:if>

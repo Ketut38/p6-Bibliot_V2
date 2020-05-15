@@ -96,7 +96,10 @@ public class ReservationController {
 			// On recupère sa reservationList
 			Integer membreId = memberCo.getId();
 			List<org.occ.p3.webservices.Reservation> memberResList = userWs.findReservationListByMemberId(membreId);
-					//userService.findBorrowListByMember(memberCo);
+				for (org.occ.p3.webservices.Reservation result : memberResList) {
+					
+					
+				}
 			// Affichage de la borrowList dans un mav
 			modelAndView = new ModelAndView("reservationPage");
 			modelAndView.addObject("ReservationList", memberResList);

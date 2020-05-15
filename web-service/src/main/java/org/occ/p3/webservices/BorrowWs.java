@@ -39,6 +39,10 @@ BorrowService borrowService;
 	public void sendMailToReservationMember(Member member, Reservation reservation) {
 	}
 	
+	@WebMethod
+	public Boolean borrowReservation(Integer reservationId, Integer membreId){
+    return borrowService.borrowReservation(reservationId, membreId);
+	}
 		
 	
 	@PostConstruct

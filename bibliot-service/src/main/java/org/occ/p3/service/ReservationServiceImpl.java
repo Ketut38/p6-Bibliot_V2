@@ -13,9 +13,12 @@ import org.occ.p3.model.Member;
 import org.occ.p3.model.Reservation;
 import org.occ.p3.model.ReservationStatusEnum;
 import org.occ.p3.model.Work;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+@Component
 @Service
 public class ReservationServiceImpl implements ReservationService {
 	@Autowired
@@ -138,14 +141,15 @@ public class ReservationServiceImpl implements ReservationService {
 		return toReturn;
 
 	}
-
-	private Boolean isWorkIsReserved(Integer workId, List<Reservation> memberResList) {
+	@Override
+	public Boolean isWorkIsReserved(Integer workId, List<Reservation> memberResList) {
 
 		Boolean toReturn = false;
 
 		for (Reservation result : memberResList) {
 
-			if (!result.getStatus().equals("Terminé")) {
+			if (!result.getStatus().equals(ReservationStatusEnum.DONE.val())) {
+				
 
 				if (result.getWorkId() == workId) {
 
@@ -159,8 +163,9 @@ public class ReservationServiceImpl implements ReservationService {
 		return toReturn;
 
 	}
-
-	private Boolean isWorkIsBorrowed(Integer workId, List<Borrow> memberBorrowList) {
+	
+	@Override
+	public Boolean isWorkIsBorrowed(Integer workId, List<Borrow> memberBorrowList) {
 
 		Boolean toReturn = false;
 

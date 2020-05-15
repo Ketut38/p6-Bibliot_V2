@@ -1,13 +1,10 @@
 package org.occ.p3.service;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -47,8 +44,11 @@ public class BorrowServiceImpl implements BorrowService {
 	ReservationRepository reservationRepository;
 	@Autowired
 	UserService userService;
+	@Autowired
+	WorkService workService;
 
 	public Boolean borrowBook(Integer workId, Integer membreId) {
+		
 
 		Boolean toReturn = false;
 
@@ -86,15 +86,16 @@ public class BorrowServiceImpl implements BorrowService {
 				borrowToSave.setStatus(BorrowStatusEnum.ENCOURS.val());
 				borrowToSave.setWorkId(workId);
 				borrowToSave.setWorkName(workName);
-			
-
+				
+				
 				// Save le borrow dans le repositor
 				borrowRepository.save(borrowToSave);
 				// Indique que le livre n'est plus disponible et on sauvegarde dans le
 				// bookRepository
 				result.setAvailable(false);
 				bookRepository.save(result);
-
+				
+			
 				// Mettre a jour la liste des emprunt du memmberCo et save
 
 				List<Borrow> memberListBorrowToUpdate = userService.findBorrowListByMember(membreEmprunt);
@@ -104,9 +105,18 @@ public class BorrowServiceImpl implements BorrowService {
 
 				toReturn = true;
 				break;
+					
 			}
 
 		}
+		// On verifie si l'oeuvre empruntée et encore empruntable
+		if(!workService.isBorrowable(workId)) {
+			myWorkGot.setBorrowable(false);
+			myWorkGot.setReservable(true);
+			workRepository.save(myWorkGot);
+		}
+		
+		
 		return toReturn;
 	}
 
@@ -186,6 +196,12 @@ public class BorrowServiceImpl implements BorrowService {
 	public void sendMailToReservationMember(Member member, Reservation reservation) {
 
 		// config connexion au serveur SMTP gmail avec TLS
+	/*	Properties props = new Properties();
+		props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "465");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.socketFactory.port", "465");
+        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");*/
 		Properties props = new Properties();
 		props.put("mail.smtp.host", "true");
 		props.put("mail.smtp.starttls.enable", "true");
@@ -224,5 +240,83 @@ public class BorrowServiceImpl implements BorrowService {
 
 	}
 
-	
+	@Override
+	public Boolean borrowReservation (Integer reservationId, Integer membreId ) {
+		Boolean toReturn = false;
+
+		// Recuperer le Work dont on connait l'ID (creer work repository)
+		Reservation reservationGot = reservationRepository.findById(reservationId).get();
+		Integer workId = reservationGot.getWorkId();
+		Work workFromReservation = workRepository.getWorkById(workId);
+		
+		
+		String workName = workFromReservation.getTitle();
+
+		// recuperer la liste dans myborrowgot
+		List<Book> bookList = workFromReservation.getBooksList();
+
+		// On parcours la bookList
+		for (Book result : bookList) {
+
+			if (result.isAvailable()) {
+
+				Borrow borrowToSave = new Borrow();
+				borrowToSave.setBook(result);
+				// on recupï¿½re l'Id du membre passï¿½ en parametre
+				Member membreEmprunt = memberRepository.findById(membreId).get();
+
+				// On associe le member a borrow
+				borrowToSave.setMemberBorrowing(membreEmprunt);
+				borrowToSave.setStartBorrowDate(new Date());
+
+				// Calcul de la date de fin d'emprunt
+				Date borrowDate = borrowToSave.getStartBorrowDate();
+				Calendar calendar = Calendar.getInstance();
+				calendar.setTime(borrowDate);
+				calendar.add(Calendar.WEEK_OF_MONTH, 4);
+				borrowToSave.setEndBorrowDate(calendar.getTime());
+
+				// Set le statut de l'emprunt + Ajout du nom de l'oeuvre ï¿½ l'emprunt +
+				// dï¿½crï¿½mente MaxResAllowed
+
+				borrowToSave.setStatus(BorrowStatusEnum.ENCOURS.val());
+				borrowToSave.setWorkId(workId);
+				borrowToSave.setWorkName(workName);
+				
+				
+				// Save le borrow dans le repositor
+				borrowRepository.save(borrowToSave);
+				// Indique que le livre n'est plus disponible et on sauvegarde dans le
+				// bookRepository
+				result.setAvailable(false);
+				bookRepository.save(result);
+				
+			
+				// Mettre a jour la liste des emprunt du memmberCo et save
+
+				List<Borrow> memberListBorrowToUpdate = userService.findBorrowListByMember(membreEmprunt);
+				memberListBorrowToUpdate.add(borrowToSave);
+
+				memberRepository.save(membreEmprunt);
+
+				toReturn = true;
+				break;
+					
+			}
+
+		}
+		// On verifie si l'oeuvre empruntée et encore empruntable
+		if(!workService.isBorrowable(workId)) {
+			workFromReservation.setBorrowable(false);
+			workFromReservation.setReservable(true);
+			workRepository.save(workFromReservation);
+		}
+		// Si reserveration avec workID existe changer ce statut à validée
+		reservationGot.setStatus(ReservationStatusEnum.DONE.val());
+		reservationRepository.save(reservationGot);
+		
+		return toReturn;
+		
+		
+	}
 }

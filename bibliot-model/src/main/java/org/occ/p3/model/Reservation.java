@@ -36,6 +36,19 @@ public class Reservation implements Serializable {
 	
 	
 	private Integer workId;
+	
+
+	public Integer getId() {
+		return id;
+	}
+
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+
 
 	public String getStatus() {
 		return status;
