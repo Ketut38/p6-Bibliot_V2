@@ -24,12 +24,12 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _GetWorksByPublicationDate_QNAME = new QName("http://webservices.p3.occ.org/", "getWorksByPublicationDate");
     private final static QName _InitResponse_QNAME = new QName("http://webservices.p3.occ.org/", "initResponse");
+    private final static QName _CancelReservation_QNAME = new QName("http://webservices.p3.occ.org/", "cancelReservation");
     private final static QName _Init_QNAME = new QName("http://webservices.p3.occ.org/", "init");
-    private final static QName _GetWorksByPublicationDateResponse_QNAME = new QName("http://webservices.p3.occ.org/", "getWorksByPublicationDateResponse");
-    private final static QName _GetWorksByAuthor_QNAME = new QName("http://webservices.p3.occ.org/", "getWorksByAuthor");
-    private final static QName _GetWorksByAuthorResponse_QNAME = new QName("http://webservices.p3.occ.org/", "getWorksByAuthorResponse");
+    private final static QName _ReserveWork_QNAME = new QName("http://webservices.p3.occ.org/", "reserveWork");
+    private final static QName _ReserveWorkResponse_QNAME = new QName("http://webservices.p3.occ.org/", "reserveWorkResponse");
+    private final static QName _CancelReservationResponse_QNAME = new QName("http://webservices.p3.occ.org/", "cancelReservationResponse");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.occ.p3.webservices
@@ -47,14 +47,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetWorksByPublicationDate }
-     * 
-     */
-    public GetWorksByPublicationDate createGetWorksByPublicationDate() {
-        return new GetWorksByPublicationDate();
-    }
-
-    /**
      * Create an instance of {@link InitResponse }
      * 
      */
@@ -63,52 +55,35 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetWorksByAuthor }
+     * Create an instance of {@link CancelReservation }
      * 
      */
-    public GetWorksByAuthor createGetWorksByAuthor() {
-        return new GetWorksByAuthor();
+    public CancelReservation createCancelReservation() {
+        return new CancelReservation();
     }
 
     /**
-     * Create an instance of {@link GetWorksByAuthorResponse }
+     * Create an instance of {@link CancelReservationResponse }
      * 
      */
-    public GetWorksByAuthorResponse createGetWorksByAuthorResponse() {
-        return new GetWorksByAuthorResponse();
+    public CancelReservationResponse createCancelReservationResponse() {
+        return new CancelReservationResponse();
     }
 
     /**
-     * Create an instance of {@link GetWorksByPublicationDateResponse }
+     * Create an instance of {@link ReserveWork }
      * 
      */
-    public GetWorksByPublicationDateResponse createGetWorksByPublicationDateResponse() {
-        return new GetWorksByPublicationDateResponse();
+    public ReserveWork createReserveWork() {
+        return new ReserveWork();
     }
 
     /**
-     * Create an instance of {@link Work }
+     * Create an instance of {@link ReserveWorkResponse }
      * 
      */
-    public Work createWork() {
-        return new Work();
-    }
-
-    /**
-     * Create an instance of {@link Book }
-     * 
-     */
-    public Book createBook() {
-        return new Book();
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetWorksByPublicationDate }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices.p3.occ.org/", name = "getWorksByPublicationDate")
-    public JAXBElement<GetWorksByPublicationDate> createGetWorksByPublicationDate(GetWorksByPublicationDate value) {
-        return new JAXBElement<GetWorksByPublicationDate>(_GetWorksByPublicationDate_QNAME, GetWorksByPublicationDate.class, null, value);
+    public ReserveWorkResponse createReserveWorkResponse() {
+        return new ReserveWorkResponse();
     }
 
     /**
@@ -121,6 +96,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CancelReservation }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices.p3.occ.org/", name = "cancelReservation")
+    public JAXBElement<CancelReservation> createCancelReservation(CancelReservation value) {
+        return new JAXBElement<CancelReservation>(_CancelReservation_QNAME, CancelReservation.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Init }{@code >}}
      * 
      */
@@ -130,30 +114,30 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetWorksByPublicationDateResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link ReserveWork }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices.p3.occ.org/", name = "getWorksByPublicationDateResponse")
-    public JAXBElement<GetWorksByPublicationDateResponse> createGetWorksByPublicationDateResponse(GetWorksByPublicationDateResponse value) {
-        return new JAXBElement<GetWorksByPublicationDateResponse>(_GetWorksByPublicationDateResponse_QNAME, GetWorksByPublicationDateResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://webservices.p3.occ.org/", name = "reserveWork")
+    public JAXBElement<ReserveWork> createReserveWork(ReserveWork value) {
+        return new JAXBElement<ReserveWork>(_ReserveWork_QNAME, ReserveWork.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetWorksByAuthor }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link ReserveWorkResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices.p3.occ.org/", name = "getWorksByAuthor")
-    public JAXBElement<GetWorksByAuthor> createGetWorksByAuthor(GetWorksByAuthor value) {
-        return new JAXBElement<GetWorksByAuthor>(_GetWorksByAuthor_QNAME, GetWorksByAuthor.class, null, value);
+    @XmlElementDecl(namespace = "http://webservices.p3.occ.org/", name = "reserveWorkResponse")
+    public JAXBElement<ReserveWorkResponse> createReserveWorkResponse(ReserveWorkResponse value) {
+        return new JAXBElement<ReserveWorkResponse>(_ReserveWorkResponse_QNAME, ReserveWorkResponse.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetWorksByAuthorResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link CancelReservationResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices.p3.occ.org/", name = "getWorksByAuthorResponse")
-    public JAXBElement<GetWorksByAuthorResponse> createGetWorksByAuthorResponse(GetWorksByAuthorResponse value) {
-        return new JAXBElement<GetWorksByAuthorResponse>(_GetWorksByAuthorResponse_QNAME, GetWorksByAuthorResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://webservices.p3.occ.org/", name = "cancelReservationResponse")
+    public JAXBElement<CancelReservationResponse> createCancelReservationResponse(CancelReservationResponse value) {
+        return new JAXBElement<CancelReservationResponse>(_CancelReservationResponse_QNAME, CancelReservationResponse.class, null, value);
     }
 
 }

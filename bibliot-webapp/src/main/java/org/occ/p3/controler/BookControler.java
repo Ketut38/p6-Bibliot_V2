@@ -1,4 +1,4 @@
-package org.occ.p3.controler;
+/*package org.occ.p3.controler;
 
 import org.occ.p3.webservices.BookWeb;
 import org.occ.p3.webservices.BookWs;
@@ -24,3 +24,4 @@ public class BookControler {
 
 
 }
+*/

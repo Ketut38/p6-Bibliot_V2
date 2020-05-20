@@ -24,10 +24,20 @@ public class WorkWs {
      return workService.getWorksByAuthor(author);
     	
     }
+    
     @WebMethod
     public List<Work> getWorksByPublicationDate (Integer publicationDate){
     return workService.getWorksByPublicationDate(publicationDate);
     	
+    }
+    
+    @WebMethod
+    public boolean isReservable(Integer workId) {
+    	return workService.isReservable(workId);
+    }
+    @WebMethod
+    public boolean isBorrowable(Integer workId) {
+    	return workService.isBorrowable(workId);
     }
     
     @PostConstruct

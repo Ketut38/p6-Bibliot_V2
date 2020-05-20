@@ -5,11 +5,13 @@
 	<endpoint name="workWeb" implementation="org.occ.p3.webservices.BookWs"
 			  url-pattern="/ws/BookWs" />
 	<endpoint name="workWeb" implementation="org.occ.p3.webservices.BorrowWs"
-			  url-pattern="/ws/borrowWs" />
+			  url-pattern="/ws/BorrowWs" />
 	<endpoint name="workWeb" implementation="org.occ.p3.webservices.UserWs"
 			  url-pattern="/ws/UserWs" />	
 	<endpoint name="workWeb" implementation="org.occ.p3.webservices.WorkWs"
-			  url-pattern="/ws/workWs" />	  
+			  url-pattern="/ws/WorkWs" />
+	<endpoint name="workWeb" implementation="org.occ.p3.webservices.ReservationWs"
+			  url-pattern="/ws/ReserveWs" />		  
 
 
 </endpoints>

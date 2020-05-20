@@ -35,24 +35,6 @@ public interface BorrowWs {
 
     /**
      * 
-     * @param arg1
-     * @param arg0
-     * @return
-     *     returns java.lang.Boolean
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "borrowBook", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.BorrowBook")
-    @ResponseWrapper(localName = "borrowBookResponse", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.BorrowBookResponse")
-    @Action(input = "http://webservices.p3.occ.org/borrowWs/borrowBookRequest", output = "http://webservices.p3.occ.org/borrowWs/borrowBookResponse")
-    public Boolean borrowBook(
-        @WebParam(name = "arg0", targetNamespace = "")
-        Integer arg0,
-        @WebParam(name = "arg1", targetNamespace = "")
-        Integer arg1);
-
-    /**
-     * 
      * @param arg0
      * @return
      *     returns java.lang.Boolean
@@ -83,5 +65,56 @@ public interface BorrowWs {
         Integer arg0,
         @WebParam(name = "arg1", targetNamespace = "")
         Integer arg1);
+
+    /**
+     * 
+     * @param arg1
+     * @param arg0
+     * @return
+     *     returns java.lang.Boolean
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "borrowBook", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.BorrowBook")
+    @ResponseWrapper(localName = "borrowBookResponse", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.BorrowBookResponse")
+    @Action(input = "http://webservices.p3.occ.org/borrowWs/borrowBookRequest", output = "http://webservices.p3.occ.org/borrowWs/borrowBookResponse")
+    public Boolean borrowBook(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Integer arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        Integer arg1);
+
+    /**
+     * 
+     * @param arg1
+     * @param arg0
+     * @return
+     *     returns java.lang.Boolean
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "borrowReservation", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.BorrowReservation")
+    @ResponseWrapper(localName = "borrowReservationResponse", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.BorrowReservationResponse")
+    @Action(input = "http://webservices.p3.occ.org/borrowWs/borrowReservationRequest", output = "http://webservices.p3.occ.org/borrowWs/borrowReservationResponse")
+    public Boolean borrowReservation(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Integer arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        Integer arg1);
+
+    /**
+     * 
+     * @param arg1
+     * @param arg0
+     */
+    @WebMethod
+    @RequestWrapper(localName = "sendMailToReservationMember", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.SendMailToReservationMember")
+    @ResponseWrapper(localName = "sendMailToReservationMemberResponse", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.SendMailToReservationMemberResponse")
+    @Action(input = "http://webservices.p3.occ.org/borrowWs/sendMailToReservationMemberRequest", output = "http://webservices.p3.occ.org/borrowWs/sendMailToReservationMemberResponse")
+    public void sendMailToReservationMember(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Member arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        Reservation arg1);
 
 }

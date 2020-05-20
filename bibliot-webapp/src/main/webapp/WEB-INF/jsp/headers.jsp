@@ -58,6 +58,8 @@ body {
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item"><a class="nav-link"
 					href="${contextPath}/borrowList">Liste des emprunts </a></li>
+					<li class="nav-item"><a class="nav-link"
+					href="${contextPath}/reservationList">Reservations</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="${contextPath}/Search">Recherche par Auteur</a></li>
 				<li class="nav-item"><a class="nav-link"
