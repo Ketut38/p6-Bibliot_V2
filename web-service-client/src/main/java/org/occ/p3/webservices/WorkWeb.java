@@ -17,7 +17,9 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
+
 @WebServiceClient(name = "workWeb", targetNamespace = "http://webservices.p3.occ.org/", wsdlLocation = "http://lfr011641:8080/bibliot-webapp/ws/WorkWs?wsdl")
+
 public class WorkWeb
     extends Service
 {
@@ -30,7 +32,9 @@ public class WorkWeb
         URL url = null;
         WebServiceException e = null;
         try {
+
             url = new URL("http://lfr011641:8080/bibliot-webapp/ws/WorkWs?wsdl");
+
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

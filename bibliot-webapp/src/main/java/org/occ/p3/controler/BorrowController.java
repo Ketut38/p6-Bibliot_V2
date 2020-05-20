@@ -122,7 +122,7 @@ UserWs userWs = userWsService.getUserWsPort();
 
 		} else {
 			modelAndView = new ModelAndView("borrowListPage");
-			modelAndView.addObject("msg", "Une erreur est survenue, l'extension n'a pas pu être réalisée");
+			modelAndView.addObject("msg", "Une erreur est survenue, l'extension n'a pas pu être réalisée, la date de retour initiale est dépassée");
 
 		}
 		return modelAndView;

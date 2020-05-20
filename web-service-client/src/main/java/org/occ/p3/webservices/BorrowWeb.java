@@ -17,7 +17,9 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
+
 @WebServiceClient(name = "borrowWeb", targetNamespace = "http://webservices.p3.occ.org/", wsdlLocation = "http://lfr011641:8080/bibliot-webapp/ws/BorrowWs?wsdl")
+
 public class BorrowWeb
     extends Service
 {
@@ -30,6 +32,7 @@ public class BorrowWeb
         URL url = null;
         WebServiceException e = null;
         try {
+
             url = new URL("http://lfr011641:8080/bibliot-webapp/ws/BorrowWs?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
