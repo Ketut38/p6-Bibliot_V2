@@ -3,6 +3,8 @@
 	<name>bibliot-webapp</name>
 	<comment></comment>
 	<projects>
+		<project>bibliot-consumer</project>
+		<project>bibliot-model</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

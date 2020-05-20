@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="p3-parent">
+        <wb-resource deploy-path="/" source-path="/bibliot-consumer/src/main/java"/>
+        <wb-resource deploy-path="/" source-path="/bibliot-model/src/main/java"/>
+        <wb-resource deploy-path="/" source-path="/bibliot-service/src/main/java"/>
+        <wb-resource deploy-path="/" source-path="/bibliot-webapp/src/main/java"/>
+    </wb-module>
+</project-modules>

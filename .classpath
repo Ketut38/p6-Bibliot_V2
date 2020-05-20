@@ -90,5 +90,7 @@
 	<classpathentry kind="src" path="/bibliot-webapp"/>
 	<classpathentry kind="src" path="/bibliot-model"/>
 	<classpathentry kind="src" path="/web-service"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="C:/Users/qabbes/Downloads/commons-collections4-4.4/commons-collections4-4.4.jar" sourcepath="C:/Users/qabbes/Downloads/commons-collections4-4.4/commons-collections4-4.4-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

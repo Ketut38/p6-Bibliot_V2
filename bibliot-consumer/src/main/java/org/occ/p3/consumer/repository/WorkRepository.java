@@ -13,6 +13,8 @@ public interface WorkRepository extends CrudRepository<Work, Integer> {
 
 
     List<Work> findByAuthorIsContainingIgnoreCase(String author);
+    
+    Work getWorkById(Integer workId);
 
 
 	

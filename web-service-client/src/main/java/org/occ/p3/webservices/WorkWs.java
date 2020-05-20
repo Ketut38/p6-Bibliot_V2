@@ -53,6 +53,36 @@ public interface WorkWs {
      * 
      * @param arg0
      * @return
+     *     returns boolean
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "isReservable", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.IsReservable")
+    @ResponseWrapper(localName = "isReservableResponse", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.IsReservableResponse")
+    @Action(input = "http://webservices.p3.occ.org/workWs/isReservableRequest", output = "http://webservices.p3.occ.org/workWs/isReservableResponse")
+    public boolean isReservable(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Integer arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns boolean
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "isBorrowable", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.IsBorrowable")
+    @ResponseWrapper(localName = "isBorrowableResponse", targetNamespace = "http://webservices.p3.occ.org/", className = "org.occ.p3.webservices.IsBorrowableResponse")
+    @Action(input = "http://webservices.p3.occ.org/workWs/isBorrowableRequest", output = "http://webservices.p3.occ.org/workWs/isBorrowableResponse")
+    public boolean isBorrowable(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Integer arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
      *     returns java.util.List<org.occ.p3.webservices.Work>
      */
     @WebMethod

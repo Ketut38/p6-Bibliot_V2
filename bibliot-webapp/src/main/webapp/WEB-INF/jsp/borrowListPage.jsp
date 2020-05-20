@@ -22,7 +22,7 @@
 <ul>
     <li>Numero d'emprûnt: <strong>${borrow.id}</strong></li>
     <li>Statut: <strong>${borrow.status}</strong></li>
-    <li>Titre du livre: <strong>${borrow.workName}</strong></li>
+    <li>Titre du livre: <strong>${borrow.workTitle}</strong></li>
     <li>Date du début de l'emprunt: <b><fmt:formatDate value="${borrow.startBorrowDate.toGregorianCalendar().time}" pattern="dd-MM-yyyy"/></b></li>
     <li>Date de fin: <b><fmt:formatDate value="${borrow.endBorrowDate.toGregorianCalendar().time}" pattern="dd-MM-yyyy"/> </b></li>
     

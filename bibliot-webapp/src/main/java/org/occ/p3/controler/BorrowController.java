@@ -21,10 +21,10 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class BorrowController{
 	
-@Autowired
+/*@Autowired
 BorrowService borrowService;
 @Autowired
-UserService userService;
+UserService userService;*/
 
 BorrowWeb borrowWsService = new BorrowWeb();
 BorrowWs borrowWs = borrowWsService.getBorrowWsPort();
@@ -137,7 +137,7 @@ UserWs userWs = userWsService.getUserWsPort();
 		Member memberCo = (Member) request.getSession().getAttribute("memberConnected");
 		Integer membreId = memberCo.getId();
 		Boolean endBorrow = borrowWs.terminateBorrow(borrowId, membreId);
-				//borrowService.terminateBorrow(borrowId, membreId);
+				
 
 		if (endBorrow == true) {
 
@@ -156,4 +156,43 @@ UserWs userWs = userWsService.getUserWsPort();
 		}
 		return modelAndView;
 	}
+	
+	@RequestMapping(value = "/borrowReservation/{reservationId}", method = RequestMethod.GET)
+	public ModelAndView borrowReservation(HttpServletRequest request, @PathVariable("reservationId") Integer reservationId) {
+
+
+			ModelAndView modelAndView = null;
+			Member memberCo = (Member) request.getSession().getAttribute("memberConnected");
+
+			if (memberCo == null) {
+
+				modelAndView = new ModelAndView("connexion");
+				modelAndView.addObject("msg", "Veuillez vous connecter pour confirmer l'emprunt");
+
+			} else {
+
+				Integer membreId = memberCo.getId();
+
+				Boolean borrowToReserve = borrowWs.borrowReservation(reservationId, membreId);
+
+				if (borrowToReserve == true) {
+
+					// lien vers jsp de recherche avec message de succès
+					List<org.occ.p3.webservices.Borrow> memberBorrowList = userWs.findBorrowListByMember(memberCo);
+							//userService.findBorrowListByMember(memberCo);
+					// Affichage de la borrowList dans un mav
+					modelAndView = new ModelAndView("borrowListPage");
+					modelAndView.addObject("memberborrowList", memberBorrowList);
+					modelAndView.addObject("msg", "L'emprunt à été realisé avec succès");
+
+				} else {
+					modelAndView = new ModelAndView("reservationPage");
+					modelAndView.addObject("msg", "Une erreur est survenue, l'emprunt n'a pas pu être réalisé");
+
+				}
+
+			}
+
+			return modelAndView;
+		}
 }

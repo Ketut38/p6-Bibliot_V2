@@ -48,9 +48,12 @@
 						<sourceDestDir>${project.basedir}/src/main/java</sourceDestDir>
 						<wsdlUrls>
 							<wsdlUrl>http://lfr011641:8080/bibliot-webapp/ws/BookWs?wsdl</wsdlUrl>
-				            <wsdlUrl>http://lfr011641:8080/bibliot-webapp/ws/borrowWs?wsdl</wsdlUrl> 
+
+				            <wsdlUrl>http://lfr011641:8080/bibliot-webapp/ws/BorrowWs?wsdl</wsdlUrl> 
 						    <wsdlUrl>http://lfr011641:8080/bibliot-webapp/ws/UserWs?wsdl</wsdlUrl> 
-							<wsdlUrl>http://lfr011641:8080/bibliot-webapp/ws/workWs?wsdl</wsdlUrl> 
+							<wsdlUrl>http://lfr011641:8080/bibliot-webapp/ws/WorkWs?wsdl</wsdlUrl>
+							<wsdlUrl>http://lfr011641:8080/bibliot-webapp/ws/ReserveWs?wsdl</wsdlUrl>  				 
+
 						</wsdlUrls>
 					</configuration>
 				</execution>
